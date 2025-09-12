@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next'
 
-import { geistMono, geistSans } from "@/ui/fonts";
-import "@/ui/styles/globals.css";
+import { geistMono, geistSans } from '@/ui/fonts'
+
+import '@/ui/styles/globals.css'
 
 export const metadata: Metadata = {
   title: {
@@ -10,13 +11,13 @@ export const metadata: Metadata = {
   },
   description: `${process.env.APP_DESCRIPTION}`,
   applicationName: `${process.env.APP_NAME}`,
-  icons: "/favicon/favicon.ico",
-};
+  icons: '/favicon/favicon.ico',
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
@@ -26,5 +27,5 @@ export default function RootLayout({
         {children}
       </body>
     </html>
-  );
+  )
 }
