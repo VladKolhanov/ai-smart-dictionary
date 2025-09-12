@@ -1,6 +1,9 @@
+import { Button } from '@/ui/components/atoms/button'
+
 export default function Home() {
   return (
-    <div className="hover:text-opacity-70 focus:text-opacity-70 text-black underline hover:font-bold focus:font-bold">
+    <div className="">
+      <Button>Click!!!</Button>
       Home page
     </div>
   )
