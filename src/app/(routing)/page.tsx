@@ -1,10 +1,10 @@
-import { Button } from '@/ui/components/atoms/button'
+import Link from 'next/link'
 
 export default function Home() {
   return (
-    <div className="">
-      <Button>Click!!!</Button>
-      Home page
+    <div>
+      <h1>Home</h1>
+      <Link href="/about">About</Link>
     </div>
   )
 }
