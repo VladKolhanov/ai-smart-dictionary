@@ -12,6 +12,33 @@ import tseslint from 'typescript-eslint'
 
 const gitignorePath = fileURLToPath(new URL('.gitignore', import.meta.url))
 
+const restrictEnvAccess = defineConfig(
+  { ignores: ['**/env.ts'] },
+  {
+    files: ['**/*.js', '**/*.ts', '**/*.tsx'],
+    rules: {
+      'no-restricted-properties': [
+        'error',
+        {
+          object: 'process',
+          property: 'env',
+          message:
+            "Use `import { ENV } from '@/lib/env'` instead to ensure validated types.",
+        },
+      ],
+      'no-restricted-imports': [
+        'error',
+        {
+          name: 'process',
+          importNames: ['env'],
+          message:
+            "Use `import { ENV } from '@/lib/env'` instead to ensure validated types.",
+        },
+      ],
+    },
+  }
+)
+
 export default defineConfig(
   includeIgnoreFile(gitignorePath, 'Imported .gitignore patterns'),
   eslint.configs.recommended,
@@ -22,6 +49,7 @@ export default defineConfig(
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
   jsxA11y.flatConfigs.recommended,
   eslintConfigPrettier,
+  restrictEnvAccess,
 
   {
     languageOptions: {

@@ -1,16 +1,17 @@
 import type { Metadata } from 'next'
 
+import { ENV } from '@/lib/env'
 import { geistMono, geistSans } from '@/ui/fonts'
 
 import '@/ui/styles/globals.css'
 
 export const metadata: Metadata = {
   title: {
-    template: `%s | ${process.env.APP_NAME}`,
-    default: `${process.env.APP_NAME}`,
+    template: `%s | ${ENV.NEXT_PUBLIC_APP_NAME}`,
+    default: ENV.NEXT_PUBLIC_APP_NAME,
   },
-  description: `${process.env.APP_DESCRIPTION}`,
-  applicationName: `${process.env.APP_NAME}`,
+  description: ENV.NEXT_PUBLIC_APP_DESCRIPTION,
+  applicationName: ENV.NEXT_PUBLIC_APP_NAME,
   icons: '/favicon/favicon.ico',
 }
 
