@@ -1,0 +1,15 @@
+{
+  "ThemeToggleComponent": {
+    "srLabel": "Toggle Theme",
+    "appearance": "Appearance",
+    "system": "system",
+    "light": "light",
+    "dark": "dark"
+  },
+  "LanguageToggleComponent": {
+    "srLabel": "Toggle language",
+    "language": "Language",
+    "english": "English",
+    "ukrainian": "Ukrainian"
+  }
+}

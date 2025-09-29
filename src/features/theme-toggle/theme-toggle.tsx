@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
 
 import { Button } from '@/ui/components/atoms/button'
@@ -18,12 +19,14 @@ export const ThemeToggle = () => {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
 
+  const t = useTranslations('ThemeToggleComponent')
+
   useEffect(() => {
     setMounted(true)
   }, [])
 
   if (!mounted) {
-    return null
+    return <button className="size-0" />
   }
 
   return (
@@ -40,31 +43,32 @@ export const ThemeToggle = () => {
           ) : (
             <SunIcon />
           )}
+          <span className="sr-only">{t('srLabel')}</span>
         </Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
         <DropdownMenuLabel className="text-center">
-          Appearance
+          {t('appearance')}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuCheckboxItem
           checked={theme === 'system'}
           onClick={() => setTheme('system')}
         >
-          System
+          {t('system')}
         </DropdownMenuCheckboxItem>
         <DropdownMenuCheckboxItem
           checked={theme === 'dark'}
           onClick={() => setTheme('dark')}
         >
-          Dark
+          {t('dark')}
         </DropdownMenuCheckboxItem>
         <DropdownMenuCheckboxItem
           checked={theme === 'light'}
           onClick={() => setTheme('light')}
         >
-          Light
+          {t('light')}
         </DropdownMenuCheckboxItem>
       </DropdownMenuContent>
     </DropdownMenu>

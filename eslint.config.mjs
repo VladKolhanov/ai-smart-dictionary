@@ -12,8 +12,8 @@ import tseslint from 'typescript-eslint'
 
 const gitignorePath = fileURLToPath(new URL('.gitignore', import.meta.url))
 
-const restrictEnvAccess = defineConfig(
-  { ignores: ['**/env.ts'] },
+const restrictUnnecessaryImports = defineConfig(
+  { ignores: ['**/env.ts', 'src/i18n/**/*'] },
   {
     files: ['**/*.js', '**/*.ts', '**/*.tsx'],
     rules: {
@@ -29,10 +29,27 @@ const restrictEnvAccess = defineConfig(
       'no-restricted-imports': [
         'error',
         {
-          name: 'process',
-          importNames: ['env'],
-          message:
-            "Use `import { ENV } from '@/lib/env'` instead to ensure validated types.",
+          paths: [
+            {
+              name: 'next/link',
+              message: 'Please import from `@/i18n/navigation` instead.',
+            },
+            {
+              name: 'next/navigation',
+              importNames: ['redirect', 'useRouter', 'usePathname'],
+              message: 'Please import from `@/i18n/navigation` instead.',
+            },
+            {
+              name: 'next/router',
+              importNames: ['useRouter'],
+              message: 'Please import from `@/i18n/navigation` instead.',
+            },
+            {
+              name: 'next-intl',
+              importNames: ['useLocale'],
+              message: 'Please import from `@/i18n/navigation` instead.',
+            },
+          ],
         },
       ],
     },
@@ -49,8 +66,9 @@ export default defineConfig(
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
   jsxA11y.flatConfigs.recommended,
   eslintConfigPrettier,
-  restrictEnvAccess,
+  restrictUnnecessaryImports,
 
+  { ignores: ['**/*.config.{js,mjs,cjs,ts,jsx,tsx}'] },
   {
     languageOptions: {
       parserOptions: {

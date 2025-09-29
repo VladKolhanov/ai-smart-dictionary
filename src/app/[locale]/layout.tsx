@@ -1,5 +1,9 @@
-import type { Metadata } from 'next'
+import { type ReactNode } from 'react'
+import { type Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { hasLocale, NextIntlClientProvider } from 'next-intl'
 
+import { routing } from '@/i18n/routing'
 import { ENV } from '@/lib/env'
 import { ThemeProvider } from '@/providers/theme-provider'
 import { geistMono, geistSans } from '@/ui/fonts'
@@ -16,11 +20,18 @@ export const metadata: Metadata = {
   icons: '/favicon/favicon.ico',
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+type Props = Readonly<{
+  children: ReactNode
+  params: Promise<{ locale: string }>
+}>
+
+export default async function RootLayout({ children, params }: Props) {
+  const { locale } = await params
+
+  if (!hasLocale(routing.locales, locale)) {
+    notFound()
+  }
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -32,7 +43,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <NextIntlClientProvider>{children}</NextIntlClientProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -1,0 +1,15 @@
+{
+  "ThemeToggleComponent": {
+    "srLabel": "Перемкнути тему",
+    "appearance": "Тема",
+    "system": "системна",
+    "light": "світла",
+    "dark": "темна"
+  },
+  "LanguageToggleComponent": {
+    "srLabel": "Перемкнути мову",
+    "language": "Мова",
+    "english": "Англійська",
+    "ukrainian": "Українська"
+  }
+}
