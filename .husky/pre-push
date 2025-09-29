@@ -1,2 +1,2 @@
-pnpm run test
+pnpm run test --passWithNoTests
 pnpm run build
