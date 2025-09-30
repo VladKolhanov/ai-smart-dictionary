@@ -6,7 +6,7 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { ENV } from '@/lib/env'
 import { routing } from '@/lib/i18n/routing'
 import { ThemeProvider } from '@/providers/theme-provider'
-import { geistMono, geistSans } from '@/ui/fonts'
+import { domine, geistMono, geistSans } from '@/ui/fonts'
 
 import '@/ui/styles/globals.css'
 
@@ -35,7 +35,7 @@ export default async function RootLayout({ children, params }: Props) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${domine.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"

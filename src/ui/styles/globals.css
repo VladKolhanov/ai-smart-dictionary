@@ -1,9 +1,12 @@
 @import 'tailwindcss';
-@import "tw-animate-css";
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-geist-sans: var(--font-geist-sans);
+  --font-geist-mono: var(--font-geist-mono);
+  --font-domine: var(--font-domine);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -112,7 +115,7 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border font-geist-sans outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
