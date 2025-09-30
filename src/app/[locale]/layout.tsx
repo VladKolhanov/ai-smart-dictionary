@@ -3,8 +3,8 @@ import { type Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
 
-import { routing } from '@/i18n/routing'
 import { ENV } from '@/lib/env'
+import { routing } from '@/lib/i18n/routing'
 import { ThemeProvider } from '@/providers/theme-provider'
 import { geistMono, geistSans } from '@/ui/fonts'
 

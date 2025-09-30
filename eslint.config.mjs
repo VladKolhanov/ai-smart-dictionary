@@ -13,7 +13,7 @@ import tseslint from 'typescript-eslint'
 const gitignorePath = fileURLToPath(new URL('.gitignore', import.meta.url))
 
 const restrictUnnecessaryImports = defineConfig(
-  { ignores: ['**/env.ts', 'src/i18n/**/*'] },
+  { ignores: ['**/env.ts', 'src/lib/i18n/**/*'] },
   {
     files: ['**/*.js', '**/*.ts', '**/*.tsx'],
     rules: {
