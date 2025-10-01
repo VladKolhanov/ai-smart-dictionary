@@ -1,15 +1,18 @@
 {
-  "ThemeToggleComponent": {
+  "ThemeToggle": {
     "srLabel": "Toggle Theme",
     "appearance": "Appearance",
     "system": "system",
     "light": "light",
     "dark": "dark"
   },
-  "LanguageToggleComponent": {
+  "LanguageToggle": {
     "srLabel": "Toggle language",
     "language": "Language",
     "english": "English",
     "ukrainian": "Ukrainian"
+  },
+  "Logo": {
+    "altText": "Ai Smart Dictionary Logo"
   }
 }

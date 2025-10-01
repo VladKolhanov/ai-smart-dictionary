@@ -1,6 +1,8 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
 
 import { cn } from '@/lib/utils'
@@ -10,7 +12,22 @@ type Props = {
 }
 
 export const Logo = ({ className }: Props) => {
-  const { theme } = useTheme()
+  const [isMounted, setIsMounted] = useState(false)
+  const { theme, systemTheme } = useTheme()
+  const t = useTranslations('Logo')
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  if (!isMounted) {
+    return null
+  }
+
+  const logoPath =
+    theme === 'dark' || (theme === 'system' && systemTheme === 'dark')
+      ? '/images/logo-light.webp'
+      : '/images/logo-dark.webp'
 
   return (
     <div
@@ -19,16 +36,7 @@ export const Logo = ({ className }: Props) => {
         className
       )}
     >
-      <Image
-        src={
-          theme === 'light'
-            ? '/images/logo-dark.webp'
-            : '/images/logo-light.webp'
-        }
-        alt="Ai Smart Dictionary Logo"
-        width={40}
-        height={40}
-      />
+      <Image src={logoPath} alt={t('altText')} width={40} height={40} />
       Smart Dictionary
     </div>
   )

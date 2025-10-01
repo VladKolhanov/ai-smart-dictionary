@@ -1,15 +1,18 @@
 {
-  "ThemeToggleComponent": {
+  "ThemeToggle": {
     "srLabel": "Перемкнути тему",
     "appearance": "Тема",
     "system": "системна",
     "light": "світла",
     "dark": "темна"
   },
-  "LanguageToggleComponent": {
+  "LanguageToggle": {
     "srLabel": "Перемкнути мову",
     "language": "Мова",
     "english": "Англійська",
     "ukrainian": "Українська"
+  },
+  "Logo": {
+    "altText": "Логотип Ai Smart Dictionary"
   }
 }
