@@ -1,6 +1,6 @@
 import { LanguageToggle } from '@/features/language-toggle'
 import { ThemeToggle } from '@/features/theme-toggle'
-import { Link } from '@/lib/i18n/navigation'
+import { Link } from '@/ui/components/molecules/link'
 import { Logo } from '@/ui/components/molecules/logo'
 
 export default function Home() {

@@ -13,7 +13,13 @@ import tseslint from 'typescript-eslint'
 const gitignorePath = fileURLToPath(new URL('.gitignore', import.meta.url))
 
 const restrictUnnecessaryImports = defineConfig(
-  { ignores: ['**/env.ts', 'src/lib/i18n/**/*'] },
+  {
+    ignores: [
+      '**/env.ts',
+      'src/lib/i18n/**/*',
+      'src/ui/components/molecules/link',
+    ],
+  },
   {
     files: ['**/*.js', '**/*.ts', '**/*.tsx'],
     rules: {
@@ -48,6 +54,12 @@ const restrictUnnecessaryImports = defineConfig(
               name: 'next-intl',
               importNames: ['useLocale'],
               message: 'Please import from `@/i18n/navigation` instead.',
+            },
+            {
+              name: '@/lib/i18n/navigation',
+              importNames: ['Link'],
+              message:
+                'Please import from `@/ui/components/molecules/link` instead.',
             },
           ],
         },
