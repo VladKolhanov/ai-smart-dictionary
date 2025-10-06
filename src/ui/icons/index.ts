@@ -5,6 +5,7 @@ export {
   ChevronRightIcon,
   CircleIcon,
   LogInIcon,
+  MenuIcon,
   MoonIcon,
   SunIcon,
   SunMoonIcon,
