@@ -22,7 +22,7 @@ type Props = {
 export const LanguageToggle = ({ className }: Props) => {
   const { locale, setLocale } = useLocale()
 
-  const t = useTranslations('LanguageToggle')
+  const t = useTranslations('languageToggle')
 
   return (
     <DropdownMenu>

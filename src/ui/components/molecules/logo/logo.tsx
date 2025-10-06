@@ -14,7 +14,7 @@ type Props = {
 export const Logo = ({ className }: Props) => {
   const [isMounted, setIsMounted] = useState(false)
   const { theme, systemTheme } = useTheme()
-  const t = useTranslations('Logo')
+  const t = useTranslations('logo')
 
   useEffect(() => {
     setIsMounted(true)

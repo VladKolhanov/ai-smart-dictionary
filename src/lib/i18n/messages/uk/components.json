@@ -1,18 +1,18 @@
 {
-  "ThemeToggle": {
+  "themeToggle": {
     "srLabel": "Перемкнути тему",
     "appearance": "Тема",
     "system": "системна",
     "light": "світла",
     "dark": "темна"
   },
-  "LanguageToggle": {
+  "languageToggle": {
     "srLabel": "Перемкнути мову",
     "language": "Мова",
     "english": "Англійська",
     "ukrainian": "Українська"
   },
-  "Logo": {
+  "logo": {
     "altText": "Логотип Ai Smart Dictionary"
   },
   "header": {

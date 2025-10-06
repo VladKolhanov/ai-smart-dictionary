@@ -19,7 +19,7 @@ export const ThemeToggle = () => {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
 
-  const t = useTranslations('ThemeToggle')
+  const t = useTranslations('themeToggle')
 
   useEffect(() => {
     setMounted(true)
