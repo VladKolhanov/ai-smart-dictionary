@@ -4,7 +4,9 @@ export {
   CheckIcon,
   ChevronRightIcon,
   CircleIcon,
+  LogInIcon,
   MoonIcon,
   SunIcon,
   SunMoonIcon,
+  UserPlusIcon,
 } from 'lucide-react'

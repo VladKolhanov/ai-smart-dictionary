@@ -14,5 +14,9 @@
   },
   "Logo": {
     "altText": "Ai Smart Dictionary Logo"
+  },
+  "header": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
   }
 }

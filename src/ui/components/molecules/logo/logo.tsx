@@ -32,7 +32,7 @@ export const Logo = ({ className }: Props) => {
   return (
     <div
       className={cn(
-        'flex items-center gap-1 font-domine text-2xl font-bold',
+        'flex w-min items-center gap-1 font-domine text-lg leading-4 font-bold',
         className
       )}
     >

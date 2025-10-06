@@ -4,6 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --breakpoint-xs: 30rem;
   --font-geist-sans: var(--font-geist-sans);
   --font-geist-mono: var(--font-geist-mono);
   --font-domine: var(--font-domine);
@@ -119,5 +120,23 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .flex-start {
+    @apply flex items-center justify-start;
+  }
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+  .flex-between {
+    @apply flex items-center justify-between;
+  }
+  .gap-sm {
+    @apply gap-2 sm:gap-4 md:gap-5;
+  }
+  .px-sm {
+    @apply px-2 sm:px-4 md:px-5;
   }
 }

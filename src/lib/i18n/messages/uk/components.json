@@ -14,5 +14,9 @@
   },
   "Logo": {
     "altText": "Логотип Ai Smart Dictionary"
+  },
+  "header": {
+    "signIn": "Увійти",
+    "signUp": "Зареєструватися"
   }
 }
