@@ -4,6 +4,7 @@ const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']),
   NEXT_PUBLIC_APP_NAME: z.string().nonempty(),
   NEXT_PUBLIC_APP_DESCRIPTION: z.string().nonempty(),
+  DATABASE_URL: z.url().nonempty(),
 })
 
 const parsedSchema = envSchema.safeParse(process.env)
