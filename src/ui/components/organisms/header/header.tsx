@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl'
 import { LanguageToggle } from '@/features/language-toggle'
 import { ThemeToggle } from '@/features/theme-toggle'
 import { ROUTES } from '@/lib/constants'
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/utils/cn'
 import { Button } from '@/ui/components/atoms/button'
 import { Separator } from '@/ui/components/atoms/separator'
 import {
