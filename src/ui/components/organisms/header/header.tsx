@@ -1,7 +1,5 @@
 import { useTranslations } from 'next-intl'
 
-import { LanguageToggle } from '@/features/language-toggle'
-import { ThemeToggle } from '@/features/theme-toggle'
 import { ROUTES } from '@/lib/constants'
 import { cn } from '@/lib/utils/cn'
 import { Button } from '@/ui/components/atoms/button'
@@ -12,8 +10,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/ui/components/atoms/sheet'
+import { LanguageToggle } from '@/ui/components/molecules/language-toggle'
 import { Link } from '@/ui/components/molecules/link'
 import { Logo } from '@/ui/components/molecules/logo'
+import { ThemeToggle } from '@/ui/components/molecules/theme-toggle'
 import { LogInIcon, MenuIcon, UserPlusIcon } from '@/ui/icons'
 
 type Props = {

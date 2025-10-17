@@ -1,10 +1,10 @@
-import { HeaderActions } from '@/ui/components/molecules/header-actions'
-import { Empty404 } from '@/ui/components/organisms/empty-404'
+import { Empty404 } from '@/ui/components/molecules/empty-404'
+import { TopBarWithActions } from '@/ui/components/molecules/top-bar-actions'
 
 export default function NotFound() {
   return (
     <main className="grid h-dvh place-items-center">
-      <HeaderActions />
+      <TopBarWithActions />
       <Empty404 />
     </main>
   )
