@@ -6,6 +6,7 @@ import { ENV } from '@/lib/env'
 import { routing } from '@/lib/i18n/routing'
 import { ThemeProvider } from '@/providers/theme-provider'
 import type { LayoutProps } from '@/types/global'
+import { Toaster } from '@/ui/components/atoms/sooner'
 import { domine, geistMono, geistSans } from '@/ui/fonts'
 
 import '@/ui/styles/globals.css'
@@ -40,7 +41,10 @@ export default async function RootLayout({ children, params }: Props) {
           enableSystem
           disableTransitionOnChange
         >
-          <NextIntlClientProvider>{children}</NextIntlClientProvider>
+          <NextIntlClientProvider>
+            <Toaster />
+            {children}
+          </NextIntlClientProvider>
         </ThemeProvider>
       </body>
     </html>

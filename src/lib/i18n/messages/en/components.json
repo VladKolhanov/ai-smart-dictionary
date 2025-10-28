@@ -26,5 +26,9 @@
     "title": "404 - Not Found",
     "description": "The page you are looking for does not exist. Please check the URL or return back.",
     "backButton": "Back"
+  },
+  "form-alert": {
+    "errorTitle": "Error!",
+    "successTitle": "Success!"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "pageComponent": {
-    "test": "Тестове повідомлення"
+  "validation": {
+    "required": "Це поле обов'язкове"
   }
 }

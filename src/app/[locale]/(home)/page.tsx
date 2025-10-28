@@ -1,3 +1,9 @@
+import { FormAddWord } from '@/ui/components/organisms/forms/form-add-word'
+
 export default function Home() {
-  return <p>Home Page</p>
+  return (
+    <div className="grid place-items-center">
+      <FormAddWord />
+    </div>
+  )
 }
