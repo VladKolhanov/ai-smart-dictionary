@@ -9,14 +9,14 @@ export const TopBarWithActions = () => {
   return (
     <TopBar>
       <TopBar.Left>
-        <ThemeToggle />
-        <LanguageToggle />
-      </TopBar.Left>
-
-      <TopBar.Right>
         <Link href={ROUTES.home} variant="ghost">
           <HomeIcon />
         </Link>
+      </TopBar.Left>
+
+      <TopBar.Right>
+        <ThemeToggle />
+        <LanguageToggle />
       </TopBar.Right>
     </TopBar>
   )
