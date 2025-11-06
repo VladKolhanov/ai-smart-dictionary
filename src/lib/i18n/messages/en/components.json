@@ -27,6 +27,11 @@
     "description": "The page you are looking for does not exist. Please check the URL or return back.",
     "backButton": "Back"
   },
+  "empty-error": {
+    "title": "Oops, something went wrong.",
+    "description": "There was a technical issue on our end. Please try again later.",
+    "tryAgain": "Try again"
+  },
   "form-alert": {
     "errorTitle": "Error!",
     "successTitle": "Success!"

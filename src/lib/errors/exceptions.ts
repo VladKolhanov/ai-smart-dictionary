@@ -1,39 +1,35 @@
-export class AppException extends Error {
-  public readonly code: string
+import { isProd } from '@/lib/env'
+
+import {
+  type CLIENT_ERROR_CODES,
+  type ERROR_CODES,
+  ERROR_MESSAGES,
+  type SYSTEM_ERROR_CODES,
+} from './definitions'
+
+class AppError extends Error {
+  public readonly code: ERROR_CODES
   public readonly cause?: unknown
 
-  constructor(message: string, code: string, cause?: unknown) {
-    super(message)
+  constructor(code: ERROR_CODES, cause?: unknown) {
+    super(ERROR_MESSAGES[code])
     this.name = this.constructor.name
     this.code = code
     this.cause = cause
-    Error.captureStackTrace(this, this.constructor)
+    if (!isProd) {
+      Error.captureStackTrace(this, this.constructor)
+    }
   }
 }
 
-export class DatabaseException extends AppException {
-  constructor(message: string, cause?: unknown) {
-    super(message, 'DATABASE_ERROR', cause)
+export class SystemError extends AppError {
+  constructor(code: SYSTEM_ERROR_CODES, cause?: unknown) {
+    super(code, cause)
   }
 }
 
-export class EmptyResultException extends AppException {
-  constructor(entity: string, context?: string) {
-    super(
-      `${entity} returned no data${context ? ` in ${context}` : ''}`,
-      'EMPTY_RESULT_ERROR'
-    )
-  }
-}
-
-export class ValidationException extends AppException {
-  constructor(message: string, cause?: unknown) {
-    super(message, 'VALIDATION_ERROR', cause)
-  }
-}
-
-export class UnknownException extends AppException {
-  constructor(message: string, cause?: unknown) {
-    super(message, 'UNKNOWN ERROR', cause)
+export class ClientError extends AppError {
+  constructor(code: CLIENT_ERROR_CODES, cause?: unknown) {
+    super(code, cause)
   }
 }

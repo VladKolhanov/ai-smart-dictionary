@@ -1,6 +1,6 @@
 import type { ZodType } from 'zod'
 
-import { ValidationException } from '@/lib/errors/exceptions'
+import { SystemError } from '@/lib/errors'
 
 export const parseFormData = <TSchema extends ZodType>(
   schema: TSchema,
@@ -9,10 +9,7 @@ export const parseFormData = <TSchema extends ZodType>(
   const parsedData = schema.safeParse(Object.fromEntries(formData))
 
   if (!parsedData.success) {
-    throw new ValidationException(
-      parsedData.error.message,
-      parsedData.error.cause
-    )
+    throw new SystemError('PARSE_SCHEMA', parsedData.error)
   }
 
   return parsedData

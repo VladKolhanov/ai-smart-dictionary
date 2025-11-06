@@ -1,32 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  type NormalizedError,
-  normalizeError,
-} from '@/lib/errors/normalize-error'
 import { tryCatch } from '@/lib/utils/try-catch'
 
-type SuccessResponse<TData> = {
-  isSuccess: true
-  data: TData | null
-}
-
-type ErrorResponse = {
-  isSuccess: false
-  error: NormalizedError
-}
-
-type HttpResponse<TData = null> = SuccessResponse<TData> | ErrorResponse
-
-const normalizeData = <TData>(
-  data: TData,
-  error: unknown
-): HttpResponse<TData> => {
-  if (data || (!data && !error)) {
-    return { isSuccess: true, data }
-  }
-
-  return { isSuccess: false, error: normalizeError(error) }
-}
+import { type HttpResponse, response } from './response'
 
 export const safeAsyncWithPayload = <TResult>(
   fn: (
@@ -40,7 +15,7 @@ export const safeAsyncWithPayload = <TResult>(
   ): Promise<HttpResponse<TResult>> => {
     const [data, error] = await tryCatch(fn(state, formData))
 
-    return normalizeData(data, error)
+    return response(data, error)
   }
 }
 
@@ -50,6 +25,6 @@ export const safeAsync = <TResult, TArgs extends any[] = any[]>(
   return async (...args: TArgs) => {
     const [data, error] = await tryCatch(fn(...args))
 
-    return normalizeData(data, error)
+    return response(data, error)
   }
 }

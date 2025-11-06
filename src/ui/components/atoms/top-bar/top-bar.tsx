@@ -19,7 +19,8 @@ const TopBarRight: FC<TopBarProps> = ({ children }) => (
   </div>
 )
 
-export const TopBar: TopBarCompound = async ({ children }) => {
+// eslint-disable-next-line @typescript-eslint/promise-function-async
+export const TopBar: TopBarCompound = ({ children }) => {
   return children
 }
 
