@@ -1,5 +1,6 @@
-import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
 
+import type { handleError } from '@/lib/errors/handle-error'
 import { cn } from '@/lib/utils/cn'
 import {
   Alert,
@@ -10,14 +11,27 @@ import { ShieldCheckIcon, ShieldXIcon } from '@/ui/icons'
 
 type Props = {
   variant: 'success' | 'error'
-  message: string
+  data: ReturnType<typeof handleError> | string
   className?: string
 }
 
-export const FormAlert = ({ variant, message, className }: Props) => {
-  const t = useTranslations('form-alert')
+export const FormAlert = ({ variant, data, className }: Props) => {
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState<
+    string | Record<string, string[]>
+  >('')
 
   const isError = variant === 'error'
+
+  useEffect(() => {
+    if (typeof data === 'string') {
+      setTitle('Error')
+      setDescription(data)
+    } else if (data.payload && typeof data.payload === 'object') {
+      setTitle(data.payload.message)
+      setDescription(data.payload.description)
+    }
+  }, [data])
 
   return (
     <Alert
@@ -25,11 +39,20 @@ export const FormAlert = ({ variant, message, className }: Props) => {
       className={cn(className)}
     >
       {isError ? <ShieldXIcon /> : <ShieldCheckIcon />}
-      <AlertTitle className="first-letter:uppercase">
-        {isError ? t('errorTitle') : t('successTitle')}
-      </AlertTitle>
+      <AlertTitle className="first-letter:uppercase">{title}</AlertTitle>
       <AlertDescription className="first-letter:uppercase">
-        {message}
+        {typeof description === 'string'
+          ? description
+          : Object.entries(description).map(([field, errors]) => (
+              <div key={field}>
+                <p>Field {`"${field}"`}:</p>
+                {errors.map((error, i) => (
+                  <p className="indent-4" key={i}>
+                    {error}
+                  </p>
+                ))}
+              </div>
+            ))}
       </AlertDescription>
     </Alert>
   )

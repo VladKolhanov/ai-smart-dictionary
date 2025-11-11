@@ -31,9 +31,5 @@
     "title": "Oops, something went wrong.",
     "description": "There was a technical issue on our end. Please try again later.",
     "tryAgain": "Try again"
-  },
-  "form-alert": {
-    "errorTitle": "Error!",
-    "successTitle": "Success!"
   }
 }

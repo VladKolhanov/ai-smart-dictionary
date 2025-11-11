@@ -1,9 +1,10 @@
 export const SYSTEM_ERROR_CODES = {
-  parse_schema: 'PARSE_SCHEMA',
+  db_column_not_exist: 'DB_COLUMN_NOT_EXIST',
+  db_column_null_value: 'DB_COLUMN_NULL_VALUE',
 } as const
 
 export const CLIENT_ERROR_CODES = {
-  example_client_error: 'EXAMPLE_CLIENT_ERROR',
+  zod_parse_schema: 'ZOD_PARSE_SCHEMA',
 } as const
 
 export type SYSTEM_ERROR_CODES =
@@ -13,6 +14,8 @@ export type CLIENT_ERROR_CODES =
 export type ERROR_CODES = SYSTEM_ERROR_CODES | CLIENT_ERROR_CODES
 
 export const ERROR_MESSAGES: Record<ERROR_CODES, string> = {
-  PARSE_SCHEMA: 'Failed to parse data schema.',
-  EXAMPLE_CLIENT_ERROR: 'Example.',
+  ZOD_PARSE_SCHEMA:
+    'Some fields have been filled out incorrectly. Please correct them.',
+  DB_COLUMN_NOT_EXIST: 'Column does not exist',
+  DB_COLUMN_NULL_VALUE: 'Null value in column violates not-null constraint',
 }

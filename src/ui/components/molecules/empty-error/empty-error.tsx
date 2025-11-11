@@ -27,7 +27,7 @@ export const EmptyError = ({ resetAction, className }: Props) => {
 
       <EmptyContent>
         <EmptyDescription>
-          <Button onClick={() => resetAction()}>Try again</Button>
+          <Button onClick={() => resetAction()}>{t('tryAgain')}</Button>
         </EmptyDescription>
       </EmptyContent>
     </Empty>

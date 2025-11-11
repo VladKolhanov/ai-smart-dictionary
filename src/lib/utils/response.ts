@@ -1,4 +1,4 @@
-import { transformClientError } from '@/lib/errors/transform-client-error'
+import { handleError } from '@/lib/errors/handle-error'
 
 type SuccessResponse<TData> = {
   isSuccess: true
@@ -7,7 +7,7 @@ type SuccessResponse<TData> = {
 
 type ErrorResponse = {
   isSuccess: false
-  error: ReturnType<typeof transformClientError>
+  error: ReturnType<typeof handleError>
 }
 
 export type HttpResponse<TData = null> = SuccessResponse<TData> | ErrorResponse
@@ -20,5 +20,5 @@ export const response = <TData>(
     return { isSuccess: true, data }
   }
 
-  return { isSuccess: false, error: transformClientError(error) }
+  return { isSuccess: false, error: handleError(error) }
 }
