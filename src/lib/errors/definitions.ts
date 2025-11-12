@@ -1,6 +1,7 @@
 export const SYSTEM_ERROR_CODES = {
   db_column_not_exist: 'DB_COLUMN_NOT_EXIST',
   db_column_null_value: 'DB_COLUMN_NULL_VALUE',
+  db_query_error_unknown: 'DB_QUERY_ERROR_UNKNOWN',
 } as const
 
 export const CLIENT_ERROR_CODES = {
@@ -18,4 +19,5 @@ export const ERROR_MESSAGES: Record<ERROR_CODES, string> = {
     'Some fields have been filled out incorrectly. Please correct them.',
   DB_COLUMN_NOT_EXIST: 'Column does not exist',
   DB_COLUMN_NULL_VALUE: 'Null value in column violates not-null constraint',
+  DB_QUERY_ERROR_UNKNOWN: 'Unknown database error',
 }

@@ -1,2 +1,2 @@
 export { ClientError, SystemError } from './exceptions'
-export { handleError as transformClientError } from './handle-error'
+export { handleError } from './handle-error'

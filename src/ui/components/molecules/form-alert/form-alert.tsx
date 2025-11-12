@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import type { ReactNode } from 'react'
 
-import type { handleError } from '@/lib/errors/handle-error'
+import type { handleError } from '@/lib/errors'
 import { cn } from '@/lib/utils/cn'
 import {
   Alert,
@@ -11,27 +11,31 @@ import { ShieldCheckIcon, ShieldXIcon } from '@/ui/icons'
 
 type Props = {
   variant: 'success' | 'error'
-  data: ReturnType<typeof handleError> | string
+  data: ReturnType<typeof handleError>
   className?: string
 }
 
 export const FormAlert = ({ variant, data, className }: Props) => {
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState<
-    string | Record<string, string[]>
-  >('')
-
+  let title: string = ''
+  let description: string | ReactNode | ReactNode[] = []
   const isError = variant === 'error'
 
-  useEffect(() => {
-    if (typeof data === 'string') {
-      setTitle('Error')
-      setDescription(data)
-    } else if (data.payload && typeof data.payload === 'object') {
-      setTitle(data.payload.message)
-      setDescription(data.payload.description)
-    }
-  }, [data])
+  if (data.type === 'parse-schema') {
+    title = data.message
+    description = Object.entries(data.fields).map(([field, errors]) => (
+      <div key={field}>
+        <p>Field {field}:</p>
+        {errors.map((error, i) => (
+          <p className="indent-4" key={i}>
+            {error}
+          </p>
+        ))}
+      </div>
+    ))
+  } else {
+    title = 'Error'
+    description = data.message
+  }
 
   return (
     <Alert
@@ -41,18 +45,7 @@ export const FormAlert = ({ variant, data, className }: Props) => {
       {isError ? <ShieldXIcon /> : <ShieldCheckIcon />}
       <AlertTitle className="first-letter:uppercase">{title}</AlertTitle>
       <AlertDescription className="first-letter:uppercase">
-        {typeof description === 'string'
-          ? description
-          : Object.entries(description).map(([field, errors]) => (
-              <div key={field}>
-                <p>Field {`"${field}"`}:</p>
-                {errors.map((error, i) => (
-                  <p className="indent-4" key={i}>
-                    {error}
-                  </p>
-                ))}
-              </div>
-            ))}
+        {description}
       </AlertDescription>
     </Alert>
   )

@@ -1,4 +1,4 @@
-import { handleError } from '@/lib/errors/handle-error'
+import { handleError } from '@/lib/errors'
 
 type SuccessResponse<TData> = {
   isSuccess: true
