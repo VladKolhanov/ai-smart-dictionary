@@ -1,30 +1,46 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { handleError } from '@/lib/errors'
 import { tryCatch } from '@/lib/utils/try-catch'
 
-import { type HttpResponse, response } from './response'
+type ActionResponse<TData> = {
+  isSuccess: boolean
+  data: TData | null
+  error: ReturnType<typeof handleError> | null
+}
+
+const actionResponse = <TData>(
+  data: TData,
+  error: unknown
+): ActionResponse<TData> => {
+  if (data || (!data && !error)) {
+    return { isSuccess: true, error: null, data }
+  }
+
+  return { isSuccess: false, error: handleError(error), data: null }
+}
 
 export const safeAsyncWithPayload = <TResult>(
   fn: (
-    state: HttpResponse<unknown> | null,
+    state: ActionResponse<unknown> | null,
     formData: FormData
   ) => Promise<TResult>
 ) => {
   return async (
-    state: HttpResponse<unknown> | null,
+    state: ActionResponse<unknown> | null,
     formData: FormData
-  ): Promise<HttpResponse<TResult>> => {
+  ): Promise<ActionResponse<TResult | null>> => {
     const [data, error] = await tryCatch(fn(state, formData))
 
-    return response(data, error)
+    return actionResponse(data, error)
   }
 }
 
 export const safeAsync = <TResult, TArgs extends any[] = any[]>(
   fn: (...args: TArgs) => Promise<TResult>
-): ((...args: TArgs) => Promise<HttpResponse<TResult>>) => {
+): ((...args: TArgs) => Promise<ActionResponse<TResult | null>>) => {
   return async (...args: TArgs) => {
     const [data, error] = await tryCatch(fn(...args))
 
-    return response(data, error)
+    return actionResponse(data, error)
   }
 }

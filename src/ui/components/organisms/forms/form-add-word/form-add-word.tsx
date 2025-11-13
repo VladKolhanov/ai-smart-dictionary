@@ -1,6 +1,6 @@
 'use client'
 
-import { useActionState, useEffect } from 'react'
+import { useActionState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
@@ -39,19 +39,16 @@ export const FormAddWord = ({ className }: Props) => {
     disabled: isPending,
   })
 
-  useEffect(() => {
-    if (!actionState) return
-    if (actionState.isSuccess) {
-      toast.success('The word has been added to your dictionary')
-      form.reset()
-    }
-  }, [actionState, form])
-
-  const isActionError = actionState && !actionState.isSuccess
+  if (actionState?.isSuccess) {
+    toast.success('The word has been added to your dictionary')
+    form.reset()
+  }
 
   return (
     <div className="flex flex-col gap-12">
-      {isActionError && <FormAlert variant="error" data={actionState.error} />}
+      {actionState?.error && (
+        <FormAlert variant="error" data={actionState.error} />
+      )}
 
       <Form {...form}>
         <form
@@ -74,8 +71,8 @@ export const FormAddWord = ({ className }: Props) => {
               autoComplete: 'off',
             }}
           />
-          <Button>Send</Button>
-          {/* <Button disabled={!form.formState.isValid || isPending}>Send</Button> */}
+
+          <Button disabled={!form.formState.isValid || isPending}>Send</Button>
         </form>
       </Form>
     </div>
