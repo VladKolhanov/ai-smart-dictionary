@@ -1,19 +1,14 @@
 import { isProd } from '@/lib/env'
 
-import {
-  type CLIENT_ERROR_CODES,
-  type ERROR_CODES,
-  ERROR_MESSAGES,
-  type SYSTEM_ERROR_CODES,
-} from './definitions'
+import { ERROR_MESSAGES, type ErrorCodes } from './definitions'
 
 type Options = { cause?: unknown; message?: string }
 
 class AppError extends Error {
-  public readonly code: ERROR_CODES
+  public readonly code
   public readonly cause?: unknown
 
-  constructor(code: ERROR_CODES, options?: Options) {
+  constructor(code: ErrorCodes, options?: Options) {
     const message = options?.message ? options.message : ERROR_MESSAGES[code]
     super(message)
     this.name = this.constructor.name
@@ -25,14 +20,8 @@ class AppError extends Error {
   }
 }
 
-export class SystemError extends AppError {
-  constructor(code: SYSTEM_ERROR_CODES, options?: Options) {
-    super(code, options)
-  }
-}
-
 export class ClientError extends AppError {
-  constructor(code: CLIENT_ERROR_CODES, options?: Options) {
+  constructor(code: ErrorCodes, options?: Options) {
     super(code, options)
   }
 }
