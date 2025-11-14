@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
 
+import { formAddWordDefaultValues } from '@/lib/constants'
 import {
   getWordsInsertSchema,
   type WordsInsertSchema,
@@ -31,10 +32,7 @@ export const FormAddWord = ({ className }: Props) => {
 
   const form = useForm<WordsInsertSchema>({
     resolver: zodResolver(schema),
-    defaultValues: {
-      word: '',
-      translation: '',
-    },
+    defaultValues: formAddWordDefaultValues,
     mode: 'onChange',
     disabled: isPending,
   })

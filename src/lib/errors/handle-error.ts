@@ -23,7 +23,8 @@ export const handleError = (error: unknown): ClientErrorResponse | never => {
     }
 
     const code = error.cause.code
-      ? messageMap[error.cause.code]
+      ? (messageMap[error.cause.code] ??
+        SYSTEM_ERROR_CODES.db_query_error_unknown)
       : SYSTEM_ERROR_CODES.db_query_error_unknown
 
     throw new SystemError(code, {

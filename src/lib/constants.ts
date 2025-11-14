@@ -3,3 +3,5 @@ export const ROUTES = {
   signIn: '/sign-in',
   signUp: '/sign-up',
 } as const
+
+export const formAddWordDefaultValues = { word: '', translation: '' }
