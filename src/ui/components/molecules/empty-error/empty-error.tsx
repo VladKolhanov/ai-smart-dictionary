@@ -11,11 +11,10 @@ import {
 } from '@/ui/components/atoms/empty'
 
 type Props = {
-  resetAction: () => void
   className?: string
 }
 
-export const EmptyError = ({ resetAction, className }: Props) => {
+export const EmptyError = ({ className }: Props) => {
   const t = useTranslations('empty-error')
 
   return (
@@ -27,7 +26,9 @@ export const EmptyError = ({ resetAction, className }: Props) => {
 
       <EmptyContent>
         <EmptyDescription>
-          <Button onClick={() => resetAction()}>{t('tryAgain')}</Button>
+          <Button onClick={() => window.location.reload()}>
+            {t('tryAgain')}
+          </Button>
         </EmptyDescription>
       </EmptyContent>
     </Empty>

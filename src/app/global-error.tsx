@@ -4,8 +4,11 @@ import { type ReactNode, useEffect } from 'react'
 import * as Sentry from '@sentry/nextjs'
 import { NextIntlClientProvider } from 'next-intl'
 
+import { ThemeProvider } from '@/providers/theme-provider'
+import { TopBar } from '@/ui/components/atoms/top-bar'
 import { EmptyError } from '@/ui/components/molecules/empty-error'
-import { TopBarWithActions } from '@/ui/components/molecules/top-bar-actions'
+import { LanguageToggle } from '@/ui/components/molecules/language-toggle'
+import { ThemeToggle } from '@/ui/components/molecules/theme-toggle'
 
 import { useGlobalErrorIntl } from './use-global-error-Intl'
 
@@ -21,9 +24,11 @@ const GlobalErrorLayout = ({
   return (
     <html lang={locale}>
       <body>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <main className="grid h-dvh place-items-center">{children}</main>
-        </NextIntlClientProvider>
+        <ThemeProvider>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <main className="grid h-dvh place-items-center">{children}</main>
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
@@ -31,10 +36,9 @@ const GlobalErrorLayout = ({
 
 type Props = {
   error: Error & { digest?: string }
-  reset: () => void
 }
 
-export default function GlobalError({ error, reset }: Props) {
+export default function GlobalError({ error }: Props) {
   const { isLoading, locale, messages } = useGlobalErrorIntl()
 
   useEffect(() => {
@@ -60,8 +64,14 @@ export default function GlobalError({ error, reset }: Props) {
 
   return (
     <GlobalErrorLayout locale={locale} messages={messages}>
-      <TopBarWithActions />
-      <EmptyError resetAction={reset} />
+      <TopBar>
+        <TopBar.Right>
+          <ThemeToggle />
+          <LanguageToggle />
+        </TopBar.Right>
+      </TopBar>
+
+      <EmptyError />
     </GlobalErrorLayout>
   )
 }
