@@ -46,10 +46,10 @@ export const LanguageToggle = ({ className }: Props) => {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => setLocale('en')}>
-          <UnitedKingdomFlagIcon /> {t('english')}
+          <UnitedKingdomFlagIcon /> English
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setLocale('uk')}>
-          <UkraineFlagIcon /> {t('ukrainian')}
+          <UkraineFlagIcon /> Українська
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

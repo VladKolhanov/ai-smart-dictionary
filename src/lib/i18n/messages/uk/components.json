@@ -8,9 +8,7 @@
   },
   "languageToggle": {
     "srLabel": "Перемкнути мову",
-    "language": "Мова",
-    "english": "Англійська",
-    "ukrainian": "Українська"
+    "language": "Мова"
   },
   "logo": {
     "altText": "Логотип Ai Smart Dictionary"
