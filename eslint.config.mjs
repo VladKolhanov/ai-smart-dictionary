@@ -9,6 +9,7 @@ import reactPlugin from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
 import tseslint from 'typescript-eslint'
+import vitest from '@vitest/eslint-plugin'
 
 const gitignorePath = fileURLToPath(new URL('.gitignore', import.meta.url))
 
@@ -95,10 +96,12 @@ export default defineConfig(
       '@next/next': nextPlugin,
       react: reactPlugin,
       'simple-import-sort': simpleImportSort,
+      vitest,
     },
     rules: {
       ...nextPlugin.configs.recommended.rules,
       ...nextPlugin.configs['core-web-vitals'].rules,
+      ...vitest.configs.recommended.rules,
       eqeqeq: 'error',
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'no-duplicate-imports': 'error',
