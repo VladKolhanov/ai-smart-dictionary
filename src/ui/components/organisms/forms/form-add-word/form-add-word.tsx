@@ -1,6 +1,6 @@
 'use client'
 
-import { useActionState } from 'react'
+import { useActionState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
@@ -13,10 +13,15 @@ import {
 } from '@/lib/db/schemas/words'
 import { addWordToDictionaryAction } from '@/lib/services/dictionary/actions'
 import { cn } from '@/lib/utils/cn'
+import { debounce } from '@/lib/utils/debounce'
+import * as localStorage from '@/lib/utils/local-storage'
 import { Button } from '@/ui/components/atoms/button'
 import { Form } from '@/ui/components/atoms/form'
 import { FormAlert } from '@/ui/components/molecules/form-alert'
 import { FormField } from '@/ui/components/molecules/form-field'
+
+const LS_KEY = 'form-add-word'
+const DEBOUNCE_MS = 500
 
 type Props = {
   className?: string
@@ -28,19 +33,42 @@ export const FormAddWord = ({ className }: Props) => {
     null
   )
   const t = useTranslations('validation')
-  const schema = getWordsInsertSchema(t)
 
   const form = useForm<WordsInsertSchema>({
-    resolver: zodResolver(schema),
-    defaultValues: formAddWordDefaultValues,
+    resolver: zodResolver(getWordsInsertSchema(t)),
+    defaultValues: localStorage.getItem(LS_KEY) || formAddWordDefaultValues,
     mode: 'onChange',
     disabled: isPending,
   })
 
-  if (actionState?.isSuccess) {
+  useEffect(() => {
+    if (!actionState?.isSuccess) return
+
     toast.success('The word has been added to your dictionary')
     form.reset()
-  }
+    localStorage.removeItem(LS_KEY)
+  }, [actionState, form])
+
+  useEffect(() => {
+    const saveToLocalStorage = debounce((values) => {
+      localStorage.setItem(LS_KEY, values)
+    }, DEBOUNCE_MS)
+
+    const unsubscribe = form.subscribe({
+      formState: {
+        values: true,
+      },
+      callback: (formState) => {
+        saveToLocalStorage(formState.values)
+      },
+    })
+
+    return () => {
+      unsubscribe()
+      saveToLocalStorage.cancel()
+      localStorage.removeItem(LS_KEY)
+    }
+  }, [form])
 
   return (
     <div className="flex flex-col gap-12">

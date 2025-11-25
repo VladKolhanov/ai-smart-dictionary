@@ -4,4 +4,7 @@ export const ROUTES = {
   signUp: '/sign-up',
 } as const
 
-export const formAddWordDefaultValues = { word: '', translation: '' }
+export const formAddWordDefaultValues = {
+  word: '',
+  translation: '',
+} as const
