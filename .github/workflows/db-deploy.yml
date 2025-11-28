@@ -1,0 +1,22 @@
+name: Deploy Database Migrations
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy-migrations:
+    name: Run Drizzle Migrate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Copy repository
+        uses: actions/checkout@v4
+
+      - name: Setup Project
+        uses: ./.github/actions/setup-project
+
+      - name: Run Migrations
+        run: pnpm run db:migrate
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
