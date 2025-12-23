@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl'
 
 import { useLocale } from '@/lib/i18n/navigation'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/shared/utils/cn'
 import { Button } from '@/ui/components/atoms/button'
 import {
   DropdownMenu,

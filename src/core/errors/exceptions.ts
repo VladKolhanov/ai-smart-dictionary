@@ -1,4 +1,4 @@
-import { isProd } from '@/lib/env'
+import { isProd } from '@/core/env'
 
 import { ERROR_MESSAGES, type ErrorCodes } from './definitions'
 

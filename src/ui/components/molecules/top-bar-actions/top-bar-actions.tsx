@@ -1,4 +1,4 @@
-import { ROUTES } from '@/lib/constants'
+import { Routes } from '@/core/constants'
 import { TopBar } from '@/ui/components/atoms/top-bar'
 import { LanguageToggle } from '@/ui/components/molecules/language-toggle'
 import { Link } from '@/ui/components/molecules/link'
@@ -9,7 +9,7 @@ export const TopBarWithActions = () => {
   return (
     <TopBar>
       <TopBar.Left>
-        <Link href={ROUTES.home} variant="ghost">
+        <Link href={Routes.Home} variant="ghost">
           <HomeIcon />
         </Link>
       </TopBar.Left>

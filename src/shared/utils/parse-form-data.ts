@@ -1,6 +1,6 @@
 import type { ZodType } from 'zod'
 
-import { ClientError } from '@/lib/errors'
+import { ClientError } from '@/core/errors'
 
 export const parseFormData = <TSchema extends ZodType>(
   schema: TSchema,

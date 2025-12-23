@@ -6,19 +6,20 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
 
-import { formAddWordDefaultValues } from '@/lib/constants'
+import * as actions from '@/features/dictionary/actions'
 import {
-  getWordsInsertSchema,
-  type WordsInsertSchema,
+  getWordInsertSchema,
+  type WordInsertSchema,
 } from '@/lib/db/schemas/words'
-import { addWordToDictionaryAction } from '@/lib/services/dictionary/actions'
-import { cn } from '@/lib/utils/cn'
-import { debounce } from '@/lib/utils/debounce'
-import * as localStorage from '@/lib/utils/local-storage'
+import { cn } from '@/shared/utils/cn'
+import { debounce } from '@/shared/utils/debounce'
+import * as localStorage from '@/shared/utils/local-storage'
 import { Button } from '@/ui/components/atoms/button'
 import { Form } from '@/ui/components/atoms/form'
 import { FormAlert } from '@/ui/components/molecules/form-alert'
 import { FormField } from '@/ui/components/molecules/form-field'
+
+import { FormAddWordDefaultValues } from './form-default-values'
 
 const LS_KEY = 'form-add-word'
 const DEBOUNCE_MS = 500
@@ -29,14 +30,14 @@ type Props = {
 
 export const FormAddWord = ({ className }: Props) => {
   const [actionState, formAction, isPending] = useActionState(
-    addWordToDictionaryAction,
+    actions.addWord,
     null
   )
   const t = useTranslations('validation')
 
-  const form = useForm<WordsInsertSchema>({
-    resolver: zodResolver(getWordsInsertSchema(t)),
-    defaultValues: localStorage.getItem(LS_KEY) || formAddWordDefaultValues,
+  const form = useForm<WordInsertSchema>({
+    resolver: zodResolver(getWordInsertSchema(t)),
+    defaultValues: localStorage.getItem(LS_KEY) || FormAddWordDefaultValues,
     mode: 'onChange',
     disabled: isPending,
   })
@@ -81,7 +82,7 @@ export const FormAddWord = ({ className }: Props) => {
           action={formAction}
           className={cn('grid gap-y-7 md:gap-x-6 lg:gap-x-12', className)}
         >
-          <FormField<WordsInsertSchema>
+          <FormField<WordInsertSchema>
             label="Word"
             name="word"
             inputProps={{
@@ -89,7 +90,7 @@ export const FormAddWord = ({ className }: Props) => {
               autoComplete: 'off',
             }}
           />
-          <FormField<WordsInsertSchema>
+          <FormField<WordInsertSchema>
             label="Translation"
             name="translation"
             inputProps={{

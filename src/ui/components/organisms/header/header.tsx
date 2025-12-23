@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl'
 
-import { ROUTES } from '@/lib/constants'
-import { cn } from '@/lib/utils/cn'
+import { Routes } from '@/core/constants'
+import { cn } from '@/shared/utils/cn'
 import { Button } from '@/ui/components/atoms/button'
 import { Separator } from '@/ui/components/atoms/separator'
 import {
@@ -31,7 +31,7 @@ export const Header = ({ className }: Props) => {
       )}
     >
       <div className="gap-sm px-sm container mx-auto grid h-[70px] grid-cols-[1fr_max-content_max-content_max-content] items-center justify-items-start">
-        <Link href={ROUTES.home} asWrapper>
+        <Link href={Routes.Home} asWrapper>
           <Logo />
         </Link>
 
@@ -39,10 +39,10 @@ export const Header = ({ className }: Props) => {
         <LanguageToggle />
 
         <nav className="hidden gap-4 md:flex">
-          <Link href={ROUTES.signIn} variant="outline">
+          <Link href={Routes.SignIn} variant="outline">
             <LogInIcon /> {t('signIn')}
           </Link>
-          <Link href={ROUTES.signUp}>
+          <Link href={Routes.SignUp}>
             <UserPlusIcon /> {t('signUp')}
           </Link>
         </nav>
@@ -67,10 +67,10 @@ export const Header = ({ className }: Props) => {
               <Separator />
 
               <div className="grid w-full grid-cols-[.8fr] grid-rows-2 justify-center gap-2 sm:grid-cols-[.5fr]">
-                <Link href={ROUTES.signIn} variant="outline">
+                <Link href={Routes.SignIn} variant="outline">
                   <LogInIcon /> {t('signIn')}
                 </Link>
-                <Link href={ROUTES.signUp}>
+                <Link href={Routes.SignUp}>
                   <UserPlusIcon /> {t('signUp')}
                 </Link>
               </div>

@@ -5,13 +5,13 @@ import process from 'process'
  * @param {string[]} filenames
  */
 const buildEslintCommand = (filenames) =>
-  `next lint --fix --file ${filenames.map((f) => path.relative(process.cwd(), f)).join(' --file ')}`
+  `eslint --fix ${filenames.map((f) => `"${path.relative(process.cwd(), f)}"`).join(' ')}`
 
 /**
  * @param {string[]} filenames
  */
 const buildPrettierCommand = (filenames) =>
-  `prettier --write ${filenames.map((f) => path.relative(process.cwd(), f)).join(' ')}`
+  `prettier --write ${filenames.map((f) => `"${path.relative(process.cwd(), f)}"`).join(' ')}`
 
 export default {
   '*.{js,jsx,ts,tsx}': [buildEslintCommand, buildPrettierCommand],

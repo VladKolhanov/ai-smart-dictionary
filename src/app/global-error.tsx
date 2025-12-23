@@ -4,7 +4,7 @@ import { type ReactNode, useEffect } from 'react'
 import * as Sentry from '@sentry/nextjs'
 import { NextIntlClientProvider } from 'next-intl'
 
-import { ThemeProvider } from '@/providers/theme-provider'
+import { ThemeProvider } from '@/core/providers/theme-provider'
 import { TopBar } from '@/ui/components/atoms/top-bar'
 import { EmptyError } from '@/ui/components/molecules/empty-error'
 import { LanguageToggle } from '@/ui/components/molecules/language-toggle'

@@ -1,4 +1,4 @@
-import { type LayoutProps } from '@/types/global'
+import { type LayoutProps } from '@/core/types/global'
 import { Footer } from '@/ui/components/organisms/footer'
 import { Header } from '@/ui/components/organisms/header'
 

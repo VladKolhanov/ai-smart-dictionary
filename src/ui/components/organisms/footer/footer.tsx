@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl'
 
-import { ENV } from '@/lib/env'
-import { cn } from '@/lib/utils/cn'
+import { ENV } from '@/core/env'
+import { cn } from '@/shared/utils/cn'
 
 type Props = {
   className?: string

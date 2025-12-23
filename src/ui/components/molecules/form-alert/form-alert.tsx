@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 
-import type { handleError } from '@/lib/errors'
-import { cn } from '@/lib/utils/cn'
+import type { handleError } from '@/core/errors'
+import { cn } from '@/shared/utils/cn'
 import {
   Alert,
   AlertDescription,

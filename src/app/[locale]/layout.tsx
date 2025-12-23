@@ -2,10 +2,10 @@ import { type Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
 
-import { ENV } from '@/lib/env'
+import { ENV } from '@/core/env'
+import { ThemeProvider } from '@/core/providers/theme-provider'
+import type { LayoutProps } from '@/core/types/global'
 import { routing } from '@/lib/i18n/routing'
-import { ThemeProvider } from '@/providers/theme-provider'
-import type { LayoutProps } from '@/types/global'
 import { Toaster } from '@/ui/components/atoms/sooner'
 import { domine, geistMono, geistSans } from '@/ui/fonts'
 

@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl'
 
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/shared/utils/cn'
 import { Button } from '@/ui/components/atoms/button'
 import {
   Empty,

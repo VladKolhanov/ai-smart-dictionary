@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { handleError } from '@/lib/errors'
-import { tryCatch } from '@/lib/utils/try-catch'
+import { handleError } from '@/core/errors'
+import { tryCatch } from '@/shared/utils/try-catch'
 
 type ActionResponse<TData> = {
   isSuccess: boolean
