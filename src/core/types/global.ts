@@ -1,8 +1,8 @@
 import type { useTranslations } from 'next-intl'
 
+import type { handleError } from '@/core/errors'
 import type componentsMessages from '@/lib/i18n/messages/en/components.json'
 import type validationMessages from '@/lib/i18n/messages/en/validation.json'
-import type { routing } from '@/lib/i18n/routing'
 
 export type TranslationKeys<
   TKey extends
@@ -10,12 +10,17 @@ export type TranslationKeys<
     | keyof typeof validationMessages,
 > = ReturnType<typeof useTranslations<TKey>>
 
-declare module 'next-intl' {
-  interface AppConfig {
-    Locale: (typeof routing.locales)[number]
-    Messages: typeof componentsMessages & typeof validationMessages
-  }
-}
+export type ActionResponse<TData> =
+  | {
+      status: 'init' | 'success'
+      data: TData | null
+      error: null
+    }
+  | {
+      status: 'error'
+      data: null
+      error: ReturnType<typeof handleError>
+    }
 
 export type LayoutProps<
   TParams extends Record<string, string | string[]> | undefined = undefined,

@@ -10,9 +10,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import type z from 'zod'
 
+import type { ActionResponse } from '@/core/types/global'
 import { debounce } from '@/shared/utils/debounce'
 import * as localStorage from '@/shared/utils/local-storage'
-import type { safeAsyncWithPayload } from '@/shared/utils/safe-async'
 
 type PersistDisabled = {
   persistKey?: undefined
@@ -27,25 +27,31 @@ type PersistEnabled<TValues> = {
 }
 
 type Options<
-  TAction extends (...args: any) => any,
+  TAction extends (
+    state: any,
+    formData: FormData
+  ) => Promise<ActionResponse<any>>,
   TValues extends FieldValues,
 > = {
   action: TAction
   getSchemaFn: (t: any) => z.ZodType<TValues, any>
   defaultValues: Required<TValues>
   disableIfPending?: UseFormProps<TValues>['disabled']
-  initActionState?: Awaited<ReturnType<TAction>>
+  initActionStateData?: Awaited<ReturnType<TAction>>['data']
 } & (PersistDisabled | PersistEnabled<TValues>) &
   Omit<UseFormProps<TValues>, 'resolver' | 'disabled' | 'defaultValues'>
 
 export const useFormWithAction = <
-  TAction extends ReturnType<typeof safeAsyncWithPayload>,
+  TAction extends (
+    state: any,
+    formData: FormData
+  ) => Promise<ActionResponse<any>>,
   TGetSchema extends (t: any) => z.ZodObject,
   TValues extends FieldValues = z.infer<ReturnType<TGetSchema>>,
 >({
   action,
   getSchemaFn,
-  initActionState,
+  initActionStateData,
   disableIfPending,
   persistKey,
   defaultValues,
@@ -53,10 +59,11 @@ export const useFormWithAction = <
   persistDebounceMs = 300,
   ...formHookProps
 }: Options<TAction, TValues>) => {
-  const [actionState, formAction, isPending] = useActionState(
-    action,
-    initActionState || null
-  )
+  const [actionState, formAction, isPending] = useActionState(action, {
+    status: 'init',
+    error: null,
+    data: initActionStateData || null,
+  })
 
   const t = useTranslations('validation')
 
@@ -109,10 +116,15 @@ export const useFormWithAction = <
   }, [defaultValues, form, persistDebounceMs, persistFields, persistKey])
 
   useEffect(() => {
-    if (actionState?.isSuccess && persistKey) {
+    if (actionState.status === 'success' && persistKey) {
       localStorage.removeItem(persistKey)
     }
   }, [actionState, persistKey])
 
-  return { form, actionState, formAction, isPending }
+  return {
+    form,
+    actionState: actionState as Awaited<ReturnType<TAction>>,
+    formAction,
+    isPending,
+  }
 }

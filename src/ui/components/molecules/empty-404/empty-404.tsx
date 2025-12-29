@@ -15,7 +15,7 @@ import { ArrowLeftIcon } from '@/ui/icons'
 
 export const Empty404 = () => {
   const router = useRouter()
-  const t = useTranslations('empty-404')
+  const t = useTranslations('empty404')
 
   return (
     <Empty>

@@ -15,7 +15,7 @@ type Props = {
 }
 
 export const EmptyError = ({ className }: Props) => {
-  const t = useTranslations('empty-error')
+  const t = useTranslations('emptyError')
 
   return (
     <Empty className={cn(className)}>

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
 
 import * as actions from '@/features/dictionary/actions'
@@ -29,16 +30,18 @@ export const FormAddWord = ({ className }: Props) => {
     disableIfPending: true,
   })
 
-  useEffect(() => {
-    if (!actionState?.isSuccess) return
+  const t = useTranslations('formAddWord')
 
-    toast.success('The word has been added to your dictionary')
-    form.reset()
-  }, [actionState, form])
+  useEffect(() => {
+    if (actionState.status === 'success') {
+      toast.success(t('toastSuccess'))
+      form.reset()
+    }
+  }, [actionState.status, form, t])
 
   return (
     <div className="flex flex-col gap-12">
-      {actionState?.error && (
+      {actionState.status === 'error' && (
         <FormAlert variant="error" data={actionState.error} />
       )}
 

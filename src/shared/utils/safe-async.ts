@@ -1,22 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { handleError } from '@/core/errors'
+import type { ActionResponse } from '@/core/types/global'
 import { tryCatch } from '@/shared/utils/try-catch'
-
-type ActionResponse<TData> = {
-  isSuccess: boolean
-  data: TData | null
-  error: ReturnType<typeof handleError> | null
-}
 
 const actionResponse = <TData>(
   data: TData,
   error: unknown
 ): ActionResponse<TData> => {
   if (data || (!data && !error)) {
-    return { isSuccess: true, error: null, data }
+    return { status: 'success', error: null, data }
   }
 
-  return { isSuccess: false, error: handleError(error), data: null }
+  return { status: 'error', error: handleError(error), data: null }
 }
 
 export const safeAsyncWithPayload = <TResult>(
