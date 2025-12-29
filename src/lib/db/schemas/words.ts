@@ -9,6 +9,9 @@ export const getWordInsertSchema = schemaWithIntl((t) =>
   createInsertSchema(wordsTable, {
     word: (schema) => schema.min(1, t?.('required')),
     translation: (schema) => schema.min(1, t?.('required')),
+  }).omit({
+    updatedAt: true,
+    createdAt: true,
   })
 )
 
