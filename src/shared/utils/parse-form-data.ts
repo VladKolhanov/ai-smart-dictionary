@@ -1,6 +1,6 @@
-import type { ZodType } from 'zod'
+import { z, type ZodType } from 'zod'
 
-import { ClientError } from '@/core/errors'
+import { AppError } from '@/core/errors/exceptions'
 
 export const parseFormData = <TSchema extends ZodType>(
   schema: TSchema,
@@ -9,7 +9,9 @@ export const parseFormData = <TSchema extends ZodType>(
   const parsedData = schema.safeParse(Object.fromEntries(formData))
 
   if (!parsedData.success) {
-    throw new ClientError('ZOD_PARSE_SCHEMA', { cause: parsedData.error })
+    throw new AppError('ZOD_PARSE_SCHEMA', {
+      details: z.flattenError(parsedData.error),
+    })
   }
 
   return parsedData

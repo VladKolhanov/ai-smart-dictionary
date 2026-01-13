@@ -14,7 +14,6 @@ export {
   MenuIcon,
   MoonIcon,
   OctagonXIcon,
-  ShieldCheckIcon,
   ShieldXIcon,
   SunIcon,
   SunMoonIcon,

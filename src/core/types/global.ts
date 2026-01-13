@@ -1,6 +1,6 @@
 import type { useTranslations } from 'next-intl'
 
-import type { handleError } from '@/core/errors'
+import { type ErrorCodes } from '@/core/errors/definitions'
 import type componentsMessages from '@/lib/i18n/messages/en/components.json'
 import type validationMessages from '@/lib/i18n/messages/en/validation.json'
 
@@ -9,6 +9,17 @@ export type TranslationKeys<
     | keyof typeof componentsMessages
     | keyof typeof validationMessages,
 > = ReturnType<typeof useTranslations<TKey>>
+
+export type ZodFlattenError = {
+  formErrors: string[]
+  fieldErrors: Record<string, string[]>
+}
+
+export type ActionError = {
+  code: ErrorCodes
+  message: string
+  details?: Record<string, string | string[]>
+}
 
 export type ActionResponse<TData> =
   | {
@@ -19,7 +30,7 @@ export type ActionResponse<TData> =
   | {
       status: 'error'
       data: null
-      error: ReturnType<typeof handleError>
+      error: ActionError
     }
 
 export type LayoutProps<

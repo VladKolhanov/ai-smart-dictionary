@@ -1,12 +1,15 @@
-export const ERROR_CODES = {
-  test: 'test',
-  zod_parse_schema: 'ZOD_PARSE_SCHEMA',
+export const ErrorCodes = {
+  ZodParseSchema: 'ZOD_PARSE_SCHEMA',
+  Test: 'TEST',
 } as const
 
-export type ErrorCodes = (typeof ERROR_CODES)[keyof typeof ERROR_CODES]
-
-export const ERROR_MESSAGES: Record<ErrorCodes, string> = {
-  test: 'test',
-  ZOD_PARSE_SCHEMA:
+export const ErrorMessages: Record<
+  (typeof ErrorCodes)[keyof typeof ErrorCodes],
+  string
+> = {
+  [ErrorCodes.ZodParseSchema]:
     'Some fields have been filled out incorrectly. Please correct them.',
+  [ErrorCodes.Test]: 'Test',
 }
+
+export type ErrorCodes = (typeof ErrorCodes)[keyof typeof ErrorCodes]

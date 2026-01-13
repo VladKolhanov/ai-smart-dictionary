@@ -13,10 +13,10 @@ import { useFormWithAction } from '@/shared/hooks/use-form-with-action/use-form-
 import { cn } from '@/shared/utils/cn'
 import { Button } from '@/ui/components/atoms/button'
 import { Form } from '@/ui/components/atoms/form'
-import { FormAlert } from '@/ui/components/molecules/form-alert'
+import { FormErrorAlert } from '@/ui/components/molecules/form-error-alert'
 import { FormField } from '@/ui/components/molecules/form-field'
 
-type Props = {
+export type Props = {
   className?: string
 }
 
@@ -40,10 +40,8 @@ export const FormAddWord = ({ className }: Props) => {
   }, [actionState.status, form, t])
 
   return (
-    <div className="flex flex-col gap-12">
-      {actionState.status === 'error' && (
-        <FormAlert variant="error" data={actionState.error} />
-      )}
+    <div className="flex w-1/3 flex-col gap-12">
+      <FormErrorAlert error={actionState.error} />
 
       <Form {...form}>
         <form
