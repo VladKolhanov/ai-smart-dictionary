@@ -1,6 +1,5 @@
 "use server"
 
-import { APIError } from "better-auth"
 import { headers } from "next/headers"
 
 import { protect } from "@/infrastructure/arcjet"
@@ -21,7 +20,6 @@ import { parseFormData } from "@/shared/utils/parse-form-data"
 import { buildQueryString } from "@/shared/utils/query-string"
 import { redirectWithSafeLocale } from "@/shared/utils/redirect-with-safe-locale"
 import { safeAction, safeFormAction } from "@/shared/utils/safe-action"
-import { tryCatch } from "@/shared/utils/try-catch"
 
 import type { SocialProviders } from "./constants"
 
@@ -29,36 +27,15 @@ export const signUp = safeFormAction(async (_state, formData) => {
   const data = parseFormData(getSignUpInputSchema(), formData)
   await protect(data.email)
 
-  const [_response, error] = await tryCatch(
-    auth.api.signUpEmail({
-      headers: await headers(),
-      body: {
-        name: data.name,
-        email: data.email,
-        password: data.password,
-        callbackURL: Routes.EmailVerified,
-      },
-    })
-  )
-
-  if (error) {
-    const isUserExistsError =
-      error instanceof APIError &&
-      (error.status === 422 ||
-        error.status === "UNPROCESSABLE_ENTITY" ||
-        error.message.includes("exists"))
-
-    if (isUserExistsError) {
-      await sendEmail({
-        subject: "emailAlreadyRegistered",
-        name: data.name,
-        email: data.email,
-        url: `${ENV_CLIENT.BASE_URL}/${Routes.SignIn}`,
-      })
-    } else {
-      throw error as APIError
-    }
-  }
+  await auth.api.signUpEmail({
+    headers: await headers(),
+    body: {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      callbackURL: Routes.EmailVerified,
+    },
+  })
 
   await clearPersistFormData(PersistKeys.FormSignUp)
   await redirectWithSafeLocale(`${Routes.ConfirmEmail}?email=${data.email}`)

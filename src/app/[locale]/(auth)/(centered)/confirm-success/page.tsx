@@ -16,7 +16,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function EmailVerifiedPage() {
+export default async function ConfirmSuccessPage() {
   await getSessionOrRedirect()
 
   return <CardConfirmSuccess className="mt-15 md:mt-25" />

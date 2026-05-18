@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect } from "react"
 import { useTranslations } from "next-intl"
 
 import type { SignInInputSchema } from "@/infrastructure/db/types"
@@ -17,10 +18,12 @@ import { cn } from "@/shared/utils/cn"
 import * as actions from "../../actions"
 
 type Props = {
+  email: string | null
   className?: string
 }
 
-export const FormSignIn = ({ className }: Props) => {
+export const FormSignIn = ({ className, email }: Props) => {
+  const t = useTranslations("formSignIn")
   const { form, actionErrorState, formAction, isPending } = useFormWithAction({
     action: actions.signIn,
     getSchemaFn: getSignInInputSchema,
@@ -31,7 +34,12 @@ export const FormSignIn = ({ className }: Props) => {
     disableIfPending: true,
   })
 
-  const t = useTranslations("formSignIn")
+  useEffect(() => {
+    if (email) {
+      form.setValue("email", email)
+      form.setFocus("password")
+    }
+  }, [email, form])
 
   return (
     <Form {...form}>

@@ -7,6 +7,7 @@ export { default as UnitedKingdomFlagIcon } from "@/public/icons/united-kingdom-
 export {
   AlertCircleIcon,
   ArrowLeftIcon,
+  ArrowRightIcon,
   CheckCircle2Icon,
   CheckCircleIcon,
   CheckIcon,

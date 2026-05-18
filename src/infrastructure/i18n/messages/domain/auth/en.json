@@ -55,9 +55,9 @@
     "backButton": "Return to previous page"
   },
   "buttonResendEmail": {
-    "repeatSending": "Send the email again{hasTime, select, true { in {time} seconds} other {}}",
+    "repeatSending": "Send the email again{hasTime, select, true { in {timer} seconds} other {}}",
     "success": "A new confirmation email has been sent to your email.",
-    "error": "Failed to send email.{hasTime, select, true { Try again in {time} seconds.} other { Try again later.}}"
+    "error": "Failed to send email.{hasTime, select, true { Try again in {timer} seconds.} other { Try again later.}}"
   },
   "emailVerified": {
     "title": "Email successfully confirmed!",

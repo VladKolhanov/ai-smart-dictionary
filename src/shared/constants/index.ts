@@ -6,7 +6,7 @@ export const Routes = {
   SignUp: "/sign-up",
   Dashboard: "/dashboard",
   ConfirmEmail: "/confirm-email",
-  EmailVerified: "/email-verified",
+  EmailVerified: "/confirm-success",
   ForgotPassword: "/forgot-password",
   ResetPassword: "/reset-password",
   CheckEmail: "/check-email",

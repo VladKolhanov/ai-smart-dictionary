@@ -8,10 +8,8 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/shared/components/ui/empty"
-import { Link } from "@/shared/components/ui/link"
 import { ButtonReturnBack } from "@/shared/components/widgets/button-return-back"
-import { Routes } from "@/shared/constants"
-import { ArrowLeftIcon, LogInIcon } from "@/shared/icons"
+import { ArrowLeftIcon } from "@/shared/icons"
 import { cn } from "@/shared/utils/cn"
 
 type Props = {
@@ -45,7 +43,7 @@ export const NotFound = ({ pathname, className }: Props) => {
         <p className="text-sm text-muted-foreground">{t("contentCheckPage")}</p>
       </EmptyContent>
 
-      <EmptyMedia className="grid w-full grid-cols-2 gap-4">
+      <EmptyMedia>
         <ButtonReturnBack
           variant="outline"
           size="xl"
@@ -53,16 +51,6 @@ export const NotFound = ({ pathname, className }: Props) => {
           <ArrowLeftIcon className="mr-2 size-4" />
           {t("return")}
         </ButtonReturnBack>
-
-        <Link
-          size="xl"
-          variant="secondary"
-          href={Routes.SignIn}
-          className="w-full sm:w-auto"
-        >
-          <LogInIcon className="mr-2 size-4" />
-          {t("sign-in")}
-        </Link>
       </EmptyMedia>
     </Empty>
   )

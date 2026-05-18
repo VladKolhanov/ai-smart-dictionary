@@ -9,10 +9,11 @@ import { cn } from "@/shared/utils/cn"
 import { FormSignIn } from "../form-sign-in"
 
 type Props = {
+  email: string | null
   className?: string
 }
 
-export const CardSignIn = async ({ className }: Props) => {
+export const CardSignIn = async ({ className, email }: Props) => {
   const t = await getTranslations("cardSignIn")
 
   return (
@@ -29,7 +30,7 @@ export const CardSignIn = async ({ className }: Props) => {
 
       <SeparatorWithLabel>{t("separator")}</SeparatorWithLabel>
 
-      <FormSignIn />
+      <FormSignIn email={email} />
 
       <p className="t-p-sm text-center">
         {t("haveAccount")}{" "}

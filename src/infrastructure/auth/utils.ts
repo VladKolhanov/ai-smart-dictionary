@@ -5,23 +5,27 @@ import { redirectWithSafeLocale } from "@/shared/utils/redirect-with-safe-locale
 
 import { auth } from "./auth"
 
-export const redirectIfSessionExist = async (to?: string) => {
+export const getSession = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   })
 
+  return session
+}
+
+export const redirectIfSessionExist = async (to: string = Routes.Dashboard) => {
+  const session = await getSession()
+
   if (session?.session) {
-    await redirectWithSafeLocale(to || Routes.Dashboard)
+    await redirectWithSafeLocale(to)
   }
 }
 
-export const getSessionOrRedirect = async (to?: string) => {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  })
+export const getSessionOrRedirect = async (to: string = Routes.SignIn) => {
+  const session = await getSession()
 
   if (!session?.session) {
-    return await redirectWithSafeLocale(to || Routes.SignIn)
+    return await redirectWithSafeLocale(to)
   }
 
   return session

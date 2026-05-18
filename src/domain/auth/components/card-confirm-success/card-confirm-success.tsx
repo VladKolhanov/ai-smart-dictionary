@@ -1,4 +1,7 @@
-import { getTranslations } from "next-intl/server"
+"use client"
+
+import { useEffect } from "react"
+import { useTranslations } from "next-intl"
 
 import {
   Card,
@@ -10,15 +13,27 @@ import {
 import { Link } from "@/shared/components/ui/link"
 import { SeparatorWithLabel } from "@/shared/components/ui/separator"
 import { Routes } from "@/shared/constants"
-import { CheckCircleIcon } from "@/shared/icons"
+import { ArrowRightIcon, CheckCircleIcon } from "@/shared/icons"
 import { cn } from "@/shared/utils/cn"
+
+import { AUTH_CHANNEL, type AuthChannelMessage } from "../../constants"
 
 type Props = {
   className?: string
 }
 
-export const CardConfirmSuccess = async ({ className }: Props) => {
-  const t = await getTranslations("emailVerified")
+export const CardConfirmSuccess = ({ className }: Props) => {
+  const t = useTranslations("emailVerified")
+
+  useEffect(() => {
+    const channel = new BroadcastChannel(AUTH_CHANNEL)
+
+    const message: AuthChannelMessage = {
+      type: "EMAIL_CONFIRMED",
+    }
+
+    channel.postMessage(message)
+  }, [])
 
   return (
     <Card className={cn("mx-auto w-full max-w-md shadow-lg", className)}>
@@ -42,10 +57,11 @@ export const CardConfirmSuccess = async ({ className }: Props) => {
 
       <CardContent className="space-y-4 text-center">
         <Link
+          className="w-full gap-2"
           size="lg"
           href={Routes.Dashboard}
         >
-          {t("dashboardButton")}
+          {t("dashboardButton")} <ArrowRightIcon />
         </Link>
 
         <p className="text-xs text-muted-foreground">{t("closeHint")}</p>

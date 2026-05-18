@@ -4,7 +4,9 @@ import { nextCookies } from "better-auth/next-js"
 
 import { dbClient } from "@/infrastructure/db/db-client"
 import { sendEmail } from "@/infrastructure/resend/utils"
+import { Routes } from "@/shared/constants"
 import { ENV } from "@/shared/env"
+import { ENV_CLIENT } from "@/shared/env-client"
 
 export const auth = betterAuth({
   emailAndPassword: {
@@ -16,6 +18,14 @@ export const auth = betterAuth({
         email: user.email,
         name: user.name,
         url,
+      })
+    },
+    onExistingUserSignUp: async ({ user }) => {
+      await sendEmail({
+        subject: "emailAlreadyRegistered",
+        name: user.name,
+        email: user.email,
+        url: `${ENV_CLIENT.BASE_URL}/${Routes.SignIn}?email=${user.email}`,
       })
     },
   },

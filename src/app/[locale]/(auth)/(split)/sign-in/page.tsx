@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server"
 import { CardSignIn } from "@/domain/auth/components/card-sign-in"
 import { redirectIfSessionExist } from "@/infrastructure/auth/utils"
 import { ToastListener } from "@/shared/components/helpers/toast-listener"
-import type { GenerateMetadataProps } from "@/shared/types/global"
+import type { GenerateMetadataProps, PageProps } from "@/shared/types/global"
 
 export async function generateMetadata({
   params,
@@ -17,13 +17,17 @@ export async function generateMetadata({
   }
 }
 
-export default async function SignInPage() {
+type Props = PageProps<undefined, { email: string }>
+
+export default async function SignInPage({ searchParams }: Props) {
   await redirectIfSessionExist()
+
+  const { email } = await searchParams
 
   return (
     <>
       <ToastListener />
-      <CardSignIn />
+      <CardSignIn email={email} />
     </>
   )
 }
