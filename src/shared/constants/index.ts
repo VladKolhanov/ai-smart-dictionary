@@ -24,3 +24,17 @@ export const PersistKeys = {
 } as const
 
 export type PersistKeys = ValueOf<typeof PersistKeys>
+
+export const AUTH_CHANNEL = "auth"
+
+export const AuthChannelMessages = {
+  EmailConfirmed: "EMAIL_CONFIRMED",
+  ExistingEmailConfirmed: "EXISTING_EMAIL_CONFIRMED",
+  EmailResetPasswordConfirmed: "EMAIL_RESET_PASSWORD_CONFIRMED",
+  SignedIn: "SIGNED_IN",
+} as const
+
+export type AuthChannelMessage = Record<
+  "type",
+  ValueOf<typeof AuthChannelMessages>
+>

@@ -5,6 +5,8 @@ import { CardConfirmSuccess } from "@/domain/auth/components/card-confirm-succes
 import { getSessionOrRedirect } from "@/infrastructure/auth/utils"
 import type { GenerateMetadataProps } from "@/shared/types/global"
 
+import { BroadcastEffect } from "./broadcast-effect"
+
 export async function generateMetadata({
   params,
 }: GenerateMetadataProps): Promise<Metadata> {
@@ -19,5 +21,11 @@ export async function generateMetadata({
 export default async function ConfirmSuccessPage() {
   await getSessionOrRedirect()
 
-  return <CardConfirmSuccess className="mt-15 md:mt-25" />
+  return (
+    <>
+      <BroadcastEffect />
+
+      <CardConfirmSuccess className="mt-15 md:mt-25" />
+    </>
+  )
 }

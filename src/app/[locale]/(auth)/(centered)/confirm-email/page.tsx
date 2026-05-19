@@ -5,6 +5,8 @@ import { CardConfirmEmail } from "@/domain/auth/components/card-confirm-email"
 import { redirectIfSessionExist } from "@/infrastructure/auth/utils"
 import type { GenerateMetadataProps, PageProps } from "@/shared/types/global"
 
+import { BroadcastEffect } from "./broadcast-effect"
+
 export async function generateMetadata({
   params,
 }: GenerateMetadataProps): Promise<Metadata> {
@@ -23,9 +25,12 @@ export default async function ConfirmEmailPage({ searchParams }: Props) {
   const { email } = await searchParams
 
   return (
-    <CardConfirmEmail
-      email={email}
-      className="mt-15 md:mt-25"
-    />
+    <>
+      <BroadcastEffect />
+      <CardConfirmEmail
+        email={email}
+        className="mt-15 md:mt-25"
+      />
+    </>
   )
 }

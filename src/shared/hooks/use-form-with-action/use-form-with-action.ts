@@ -21,12 +21,14 @@ type PersistDisabled = {
   persistKey?: undefined
   persistFields?: never
   persistDebounceMs?: never
+  persistTimeToLive?: never
 }
 
 type PersistEnabled<TValues> = {
   persistKey: PersistKeys
   persistFields?: (keyof TValues)[]
   persistDebounceMs?: number
+  persistTimeToLive?: number
 }
 
 type Options<
@@ -53,7 +55,8 @@ export const useFormWithAction = <
   persistKey,
   defaultValues,
   persistFields,
-  persistDebounceMs = 300,
+  persistDebounceMs,
+  persistTimeToLive,
   ...formHookProps
 }: Options<TValues, TAction>) => {
   const [actionState, formAction, isPending] = useActionState(action, {
@@ -77,6 +80,7 @@ export const useFormWithAction = <
     persistKey,
     persistFields,
     persistDebounceMs,
+    persistTimeToLive,
     actionStatus: actionState.status,
     isPending,
   })

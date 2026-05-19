@@ -8,13 +8,37 @@ import { debounce } from "@/shared/utils/debounce"
 import * as localStorage from "@/shared/utils/local-storage"
 import { objectKeys } from "@/shared/utils/object"
 
+type LocalStorageData<TValues> = {
+  data: TValues
+  timestamp: number
+}
+
 type UseFormPersistenceProps<TValues extends FieldValues> = {
   form: UseFormReturn<TValues>
   persistKey?: PersistKeys
   persistFields?: (keyof TValues)[]
   persistDebounceMs?: number
+  persistTimeToLive?: number
   actionStatus?: "init" | "success" | "error"
   isPending?: boolean
+}
+
+function applyDataToForm<TValues extends FieldValues>(
+  form: UseFormReturn<TValues>,
+  persistData: LocalStorageData<TValues>,
+  persistFields?: (keyof TValues)[]
+) {
+  const fieldsToApply =
+    persistFields && persistFields.length > 0
+      ? persistFields
+      : objectKeys(persistData)
+
+  fieldsToApply.forEach((key) => {
+    const value = persistData.data[key]
+    if (value !== undefined) {
+      form.setValue(key as Path<TValues>, value)
+    }
+  })
 }
 
 export function useFormPersistence<TValues extends FieldValues>({
@@ -22,6 +46,7 @@ export function useFormPersistence<TValues extends FieldValues>({
   persistKey,
   persistFields,
   persistDebounceMs = 300,
+  persistTimeToLive,
   actionStatus,
   isPending,
 }: UseFormPersistenceProps<TValues>) {
@@ -31,23 +56,27 @@ export function useFormPersistence<TValues extends FieldValues>({
   useEffect(() => {
     if (!persistKey || isLoadedRef.current) return
 
-    const persistData = localStorage.getItem<TValues>(persistKey)
+    const persistData =
+      localStorage.getItem<LocalStorageData<TValues>>(persistKey)
 
-    if (persistData) {
-      const fieldsToApply =
-        persistFields && persistFields.length > 0
-          ? persistFields
-          : objectKeys(persistData)
+    if (!persistData) return
 
-      fieldsToApply.forEach((key) => {
-        const value = persistData[key]
-        if (value !== undefined) {
-          form.setValue(key as Path<TValues>, value)
-        }
-      })
+    if (persistTimeToLive) {
+      const isDataLive = persistData.timestamp + persistTimeToLive > Date.now()
+
+      if (isDataLive) {
+        applyDataToForm(form, persistData, persistFields)
+        isLoadedRef.current = true
+      } else {
+        Cookie.remove(persistKey)
+        localStorage.removeItem(persistKey)
+        isLoadedRef.current = false
+      }
+    } else {
+      applyDataToForm(form, persistData, persistFields)
       isLoadedRef.current = true
     }
-  }, [persistKey, form, persistFields])
+  }, [persistKey, form, persistFields, persistTimeToLive])
 
   /* Set persist data */
   useEffect(() => {
@@ -64,6 +93,7 @@ export function useFormPersistence<TValues extends FieldValues>({
           if (!persistFields || persistFields.includes(key)) {
             acc[key] = value
           }
+
           return acc
         },
         {}
@@ -79,7 +109,7 @@ export function useFormPersistence<TValues extends FieldValues>({
         return
       }
 
-      saveToLocalStorage(formData)
+      saveToLocalStorage({ data: formData, timestamp: Date.now() })
     })
 
     return () => {

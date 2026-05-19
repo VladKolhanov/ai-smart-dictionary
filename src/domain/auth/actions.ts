@@ -37,7 +37,6 @@ export const signUp = safeFormAction(async (_state, formData) => {
     },
   })
 
-  await clearPersistFormData(PersistKeys.FormSignUp)
   await redirectWithSafeLocale(`${Routes.ConfirmEmail}?email=${data.email}`)
 })
 

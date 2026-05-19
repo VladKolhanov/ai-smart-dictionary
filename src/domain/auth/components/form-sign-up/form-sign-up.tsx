@@ -25,6 +25,7 @@ export const FormSignUp = ({ className }: Props) => {
     defaultValues: { name: "", email: "", password: "", confirmPassword: "" },
     persistKey: PersistKeys.FormSignUp,
     persistFields: ["email", "name"],
+    persistTimeToLive: 1000 * 60 * 60,
     mode: "onChange",
     disableIfPending: true,
   })

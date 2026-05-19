@@ -1,7 +1,4 @@
-"use client"
-
-import { useEffect } from "react"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 
 import {
   Card,
@@ -16,24 +13,12 @@ import { Routes } from "@/shared/constants"
 import { ArrowRightIcon, CheckCircleIcon } from "@/shared/icons"
 import { cn } from "@/shared/utils/cn"
 
-import { AUTH_CHANNEL, type AuthChannelMessage } from "../../constants"
-
 type Props = {
   className?: string
 }
 
-export const CardConfirmSuccess = ({ className }: Props) => {
-  const t = useTranslations("emailVerified")
-
-  useEffect(() => {
-    const channel = new BroadcastChannel(AUTH_CHANNEL)
-
-    const message: AuthChannelMessage = {
-      type: "EMAIL_CONFIRMED",
-    }
-
-    channel.postMessage(message)
-  }, [])
+export const CardConfirmSuccess = async ({ className }: Props) => {
+  const t = await getTranslations("emailVerified")
 
   return (
     <Card className={cn("mx-auto w-full max-w-md shadow-lg", className)}>

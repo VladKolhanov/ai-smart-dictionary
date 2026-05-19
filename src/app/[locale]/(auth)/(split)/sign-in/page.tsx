@@ -6,6 +6,8 @@ import { redirectIfSessionExist } from "@/infrastructure/auth/utils"
 import { ToastListener } from "@/shared/components/helpers/toast-listener"
 import type { GenerateMetadataProps, PageProps } from "@/shared/types/global"
 
+import { BroadcastEffect } from "./broadcast-effect"
+
 export async function generateMetadata({
   params,
 }: GenerateMetadataProps): Promise<Metadata> {
@@ -26,7 +28,9 @@ export default async function SignInPage({ searchParams }: Props) {
 
   return (
     <>
+      <BroadcastEffect />
       <ToastListener />
+
       <CardSignIn email={email} />
     </>
   )

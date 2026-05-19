@@ -1,9 +1,5 @@
-"use client"
+import { getTranslations } from "next-intl/server"
 
-import { useEffect } from "react"
-import { useTranslations } from "next-intl"
-
-import { useRouter } from "@/infrastructure/i18n/navigation"
 import {
   Card,
   CardContent,
@@ -14,12 +10,10 @@ import {
 } from "@/shared/components/ui/card"
 import { Link } from "@/shared/components/ui/link"
 import { ButtonReturnBack } from "@/shared/components/widgets/button-return-back"
-import { Routes } from "@/shared/constants"
 import { ArrowLeftIcon, ExternalLinkIcon, MailIcon } from "@/shared/icons"
 import { cn } from "@/shared/utils/cn"
 
 import * as actions from "../../actions"
-import { AUTH_CHANNEL, type AuthChannelMessage } from "../../constants"
 import { ButtonResendEmail } from "../button-resend-email"
 
 type Props = {
@@ -27,24 +21,8 @@ type Props = {
   className?: string
 }
 
-export const CardConfirmEmail = ({ className, email }: Props) => {
-  const t = useTranslations("cardConfirmEmail")
-  const router = useRouter()
-
-  useEffect(() => {
-    const channel = new BroadcastChannel(AUTH_CHANNEL)
-
-    channel.onmessage = (event: MessageEvent<AuthChannelMessage>) => {
-      if (event.data.type === "EMAIL_CONFIRMED") {
-        router.push(Routes.Dashboard)
-        router.refresh()
-      }
-    }
-
-    return () => {
-      channel.close()
-    }
-  }, [router])
+export const CardConfirmEmail = async ({ className, email }: Props) => {
+  const t = await getTranslations("cardConfirmEmail")
 
   return (
     <Card className={cn("mx-auto w-full max-w-md shadow-lg", className)}>
