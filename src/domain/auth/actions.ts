@@ -17,7 +17,6 @@ import { ENV_CLIENT } from "@/shared/env-client"
 import { AppError, BussinessError } from "@/shared/errors/exceptions"
 import { clearPersistFormData } from "@/shared/utils/clear-persist-form-data"
 import { parseFormData } from "@/shared/utils/parse-form-data"
-import { buildQueryString } from "@/shared/utils/query-string"
 import { redirectWithSafeLocale } from "@/shared/utils/redirect-with-safe-locale"
 import { safeAction, safeFormAction } from "@/shared/utils/safe-action"
 
@@ -124,7 +123,6 @@ export const forgotPassword = safeFormAction(async (_state, formData) => {
     },
   })
 
-  await clearPersistFormData(PersistKeys.FormForgotPassword)
   await redirectWithSafeLocale(`${Routes.CheckEmail}?email=${data.email}`)
 })
 
@@ -161,10 +159,5 @@ export const resetPassword = safeFormAction(async (_actionState, formData) => {
     },
   })
 
-  await clearPersistFormData(PersistKeys.FormResetPassword)
-  await redirectWithSafeLocale(
-    buildQueryString(Routes.SignIn, {
-      toast: { variant: "success", keyMessage: "resetPasswordSuccess" },
-    })
-  )
+  await redirectWithSafeLocale(`${Routes.SignIn}?toastResetPassword=true`)
 })

@@ -30,6 +30,7 @@ export const FormSignIn = ({ className, email }: Props) => {
     defaultValues: { email: "", password: "", rememberMe: false },
     persistKey: PersistKeys.FormSignIn,
     persistFields: ["email", "rememberMe"],
+    persistTimeToLive: 1000 * 60 * 60,
     mode: "onChange",
     disableIfPending: true,
   })

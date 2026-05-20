@@ -3,10 +3,10 @@ import { getTranslations } from "next-intl/server"
 
 import { CardSignIn } from "@/domain/auth/components/card-sign-in"
 import { redirectIfSessionExist } from "@/infrastructure/auth/utils"
-import { ToastListener } from "@/shared/components/helpers/toast-listener"
 import type { GenerateMetadataProps, PageProps } from "@/shared/types/global"
 
 import { BroadcastEffect } from "./broadcast-effect"
+import { ToastEffect } from "./toast-effect"
 
 export async function generateMetadata({
   params,
@@ -19,17 +19,23 @@ export async function generateMetadata({
   }
 }
 
-type Props = PageProps<undefined, { email: string }>
+type Props = PageProps<
+  undefined,
+  { email: string; isResetPasswordCompleted: string }
+>
 
 export default async function SignInPage({ searchParams }: Props) {
   await redirectIfSessionExist()
 
-  const { email } = await searchParams
+  const { email, isResetPasswordCompleted } = await searchParams
 
   return (
     <>
-      <BroadcastEffect />
-      <ToastListener />
+      <BroadcastEffect
+        isResetPasswordCompleted={!!isResetPasswordCompleted}
+        email={email}
+      />
+      <ToastEffect isResetPasswordCompleted={!!isResetPasswordCompleted} />
 
       <CardSignIn email={email} />
     </>

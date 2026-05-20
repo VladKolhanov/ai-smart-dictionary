@@ -20,7 +20,6 @@ export const PersistKeys = {
   FormSignIn: "form-sign-in",
   FormAddWord: "form-add-word",
   FormForgotPassword: "form-forgot-password",
-  FormResetPassword: "form-reset-password",
 } as const
 
 export type PersistKeys = ValueOf<typeof PersistKeys>
@@ -30,7 +29,7 @@ export const AUTH_CHANNEL = "auth"
 export const AuthChannelMessages = {
   EmailConfirmed: "EMAIL_CONFIRMED",
   ExistingEmailConfirmed: "EXISTING_EMAIL_CONFIRMED",
-  EmailResetPasswordConfirmed: "EMAIL_RESET_PASSWORD_CONFIRMED",
+  ResetPasswordCompleted: "RESET_PASSWORD_COMPLETED",
   SignedIn: "SIGNED_IN",
 } as const
 

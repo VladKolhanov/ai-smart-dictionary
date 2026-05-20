@@ -52,5 +52,10 @@ export const getResetPasswordInputSchema = schemaWithIntl((t) =>
     .extend({
       token: zStringOptional(),
       password: ztPasswordRequired(t),
+      confirmPassword: z.string().min(1, t?.("required")),
+    })
+    .refine((field) => field.password === field.confirmPassword, {
+      message: t?.("confirmPassword"),
+      path: ["confirmPassword"],
     })
 )

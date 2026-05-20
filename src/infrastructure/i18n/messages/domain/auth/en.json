@@ -48,11 +48,8 @@
   },
   "cardConfirmEmail": {
     "title": "Check your email",
-    "description": "We sent an email to:",
-    "main": "Click the link inside to sign in or activate your account.",
-    "note": "Don't see the email? Check your <strong>Spam</strong> folder or try sending your request again.",
-    "openPost": "Open mail",
-    "backButton": "Return to previous page"
+    "subtitle": "We sent an email to:",
+    "content": "Click the link inside to sign in or activate your account."
   },
   "buttonResendEmail": {
     "repeatSending": "Send the email again{hasTime, select, true { in {timer} seconds} other {}}",
@@ -66,34 +63,38 @@
     "closeHint": "You can now safely close this window.",
     "separator": "OR"
   },
-  "forgotPasswordCard": {
-    "title": "Forgot Password?",
-    "successTitle": "Check your email",
-    "description": "Enter your email address and we will send you a reset link.",
-    "successMessage": "If an account exists, we have sent instructions to your email.",
-    "backToLogin": "Back to Login"
+  "cardForgotPassword": {
+    "title": "Reset your password",
+    "subtitle": "Enter your email address and we'll send you a link to reset your password",
+    "back": "Back to sign in"
   },
   "formForgotPassword": {
     "labelEmail": "Email",
-    "submitButton": "Send Reset Link"
+    "submitButton": "Send reset Link",
+    "placeholders": {
+      "email": "your@gmail.com"
+    }
   },
   "cardCheckEmail": {
     "title": "Check your email",
-    "description": "If an account with the email exist we have sent a password reset link to",
-    "main": "Click the link inside to reset your password.",
-    "note": "Don't see the email? Check your <strong>Spam</strong> folder or try sending your request again.",
-    "openPost": "Open mail",
-    "backButton": "Return to previous page"
+    "subtitle": "We sent an email to:",
+    "content": "Click the link inside to create new password."
   },
-  "resetPasswordCard": {
-    "title": "Reset Password",
-    "description": "Enter a new password for your account."
+  "cardResetPassword": {
+    "title": "New password",
+    "subtitile": "Enter a new password for your account"
   },
   "formResetPassword": {
-    "password": "Password",
-    "sendForm": "Change Password"
+    "password": "New password",
+    "confirmPassword": "Confirm password",
+    "sendForm": "Save password"
   },
-  "toastListener": {
+  "signInToast": {
     "resetPasswordSuccess": "Your password has been changed successfully. You can now log in with your new password."
+  },
+  "checkEmailLayout": {
+    "content": "Don't see the email? Check your <strong>Spam</strong> folder or try sending your request again.",
+    "openPost": "Open mail",
+    "backButton": "Return to previous page"
   }
 }

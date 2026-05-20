@@ -10,6 +10,7 @@ import { FieldInputController } from "@/shared/components/widgets/field-input-co
 import { FormSubmitButton } from "@/shared/components/widgets/form-submit-button"
 import { PersistKeys } from "@/shared/constants"
 import { useFormWithAction } from "@/shared/hooks"
+import { SendIcon } from "@/shared/icons"
 import { cn } from "@/shared/utils/cn"
 
 import * as actions from "../../actions"
@@ -25,6 +26,7 @@ export const FormForgotPassword = ({ className }: Props) => {
     defaultValues: { email: "" },
     persistKey: PersistKeys.FormForgotPassword,
     persistFields: ["email"],
+    persistTimeToLive: 1000 * 60 * 60,
     mode: "onChange",
     disableIfPending: true,
   })
@@ -39,14 +41,14 @@ export const FormForgotPassword = ({ className }: Props) => {
       />
       <form
         action={formAction}
-        className={cn("grid gap-y-7 md:gap-x-6 lg:gap-x-12", className)}
+        className={cn("space-y-6 text-left", className)}
       >
         <FieldInputController<ForgotPasswordInputSchema>
           name="email"
           label={t("labelEmail")}
           inputProps={{
             autoComplete: "email",
-            placeholder: "example@example.com",
+            placeholder: t("placeholders.email"),
             type: "email",
           }}
         />
@@ -55,6 +57,7 @@ export const FormForgotPassword = ({ className }: Props) => {
           disabled={!form.formState.isValid || isPending}
           className="w-full"
         >
+          <SendIcon className="size-4" />
           {t("submitButton")}
         </FormSubmitButton>
       </form>

@@ -8,8 +8,8 @@ import { Form } from "@/shared/components/ui/form"
 import { ErrorAlert } from "@/shared/components/widgets/error-alert"
 import { FieldInputController } from "@/shared/components/widgets/field-input-controller"
 import { FormSubmitButton } from "@/shared/components/widgets/form-submit-button"
-import { PersistKeys } from "@/shared/constants"
 import { useFormWithAction } from "@/shared/hooks"
+import { CheckIcon } from "@/shared/icons"
 import { cn } from "@/shared/utils/cn"
 
 import * as actions from "../../actions"
@@ -23,8 +23,7 @@ export const FormResetPassword = ({ className, token }: Props) => {
   const { form, actionErrorState, formAction, isPending } = useFormWithAction({
     action: actions.resetPassword,
     getSchemaFn: getResetPasswordInputSchema,
-    defaultValues: { password: "", token: token ?? "" },
-    persistKey: PersistKeys.FormResetPassword,
+    defaultValues: { password: "", confirmPassword: "", token: token ?? "" },
     mode: "onChange",
     disableIfPending: true,
   })
@@ -39,7 +38,7 @@ export const FormResetPassword = ({ className, token }: Props) => {
       />
       <form
         action={formAction}
-        className={cn("grid gap-y-7 md:gap-x-6 lg:gap-x-12", className)}
+        className={cn("space-y-6 text-left", className)}
       >
         <FieldInputController<ResetPasswordInsertSchema>
           name="token"
@@ -59,10 +58,20 @@ export const FormResetPassword = ({ className, token }: Props) => {
           }}
         />
 
+        <FieldInputController<ResetPasswordInsertSchema>
+          name="confirmPassword"
+          label={t("confirmPassword")}
+          inputProps={{
+            autoComplete: "new-password",
+            type: "password",
+          }}
+        />
+
         <FormSubmitButton
           disabled={!form.formState.isValid || isPending}
           className="w-full"
         >
+          <CheckIcon className="size-4" />
           {t("sendForm")}
         </FormSubmitButton>
       </form>
