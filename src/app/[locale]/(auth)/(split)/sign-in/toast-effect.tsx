@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { useTranslations } from "next-intl"
 import { toast } from "sonner"
 
@@ -9,11 +9,13 @@ type Props = {
 }
 
 export const ToastEffect = ({ isResetPasswordCompleted }: Props) => {
+  const hasShown = useRef(false)
   const t = useTranslations("signInToast")
 
   useEffect(() => {
-    if (isResetPasswordCompleted) {
+    if (isResetPasswordCompleted && !hasShown.current) {
       toast.success(t("resetPasswordSuccess"))
+      hasShown.current = true
     }
   }, [t, isResetPasswordCompleted])
 

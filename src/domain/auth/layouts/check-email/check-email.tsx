@@ -29,17 +29,17 @@ export const CheckEmailLayout = async ({
   return (
     <section
       className={cn(
-        "mx-auto w-full max-w-md animate-fade-up px-4 md:px-0",
+        "mx-auto w-full max-w-md animate-fade-up space-y-4 px-4 md:px-0",
         className
       )}
     >
       <div className="mb-2 flex justify-center">
-        <div className="rounded-full bg-primary/20 p-3">
+        <div className="rounded-full bg-primary/30 p-3">
           <MailOpenIcon className="size-8 text-primary" />
         </div>
       </div>
 
-      <hgroup className="mb-3 space-y-2 text-center">
+      <hgroup className="space-y-2 text-center">
         <h1 className="text-2xl leading-snug font-bold">{title}</h1>
         {email && (
           <p className="text-base text-muted-foreground">
@@ -51,11 +51,9 @@ export const CheckEmailLayout = async ({
         )}
       </hgroup>
 
-      <p className="mb-3 text-center text-sm text-muted-foreground">
-        {content}
-      </p>
+      <p className="text-center text-sm text-muted-foreground">{content}</p>
 
-      <article className="mb-5 flex items-center gap-3 rounded-lg bg-muted/40 p-2 text-left">
+      <article className="flex items-center gap-3 rounded-lg bg-muted/40 p-2 text-left">
         <span className="text-xl">💡</span>
         <p>
           {t.rich("content", {

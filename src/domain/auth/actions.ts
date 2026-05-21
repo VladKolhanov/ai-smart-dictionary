@@ -159,5 +159,5 @@ export const resetPassword = safeFormAction(async (_actionState, formData) => {
     },
   })
 
-  await redirectWithSafeLocale(`${Routes.SignIn}?toastResetPassword=true`)
+  await redirectWithSafeLocale(`${Routes.SignIn}?isResetPasswordCompleted=true`)
 })

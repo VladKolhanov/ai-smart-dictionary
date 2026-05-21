@@ -1,12 +1,11 @@
 import { useEffect, useRef } from "react"
-import type { FieldValues, Path, UseFormReturn } from "react-hook-form"
+import { type FieldValues, type UseFormReturn, useWatch } from "react-hook-form"
 import Cookie from "js-cookie"
 
 import type { PersistKeys } from "@/shared/constants"
 import type { PlainObject } from "@/shared/types/global"
 import { debounce } from "@/shared/utils/debounce"
 import * as localStorage from "@/shared/utils/local-storage"
-import { objectKeys } from "@/shared/utils/object"
 
 type LocalStorageData<TValues> = {
   data: TValues
@@ -23,24 +22,6 @@ type UseFormPersistenceProps<TValues extends FieldValues> = {
   isPending?: boolean
 }
 
-function applyDataToForm<TValues extends FieldValues>(
-  form: UseFormReturn<TValues>,
-  persistData: LocalStorageData<TValues>,
-  persistFields?: (keyof TValues)[]
-) {
-  const fieldsToApply =
-    persistFields && persistFields.length > 0
-      ? persistFields
-      : objectKeys(persistData)
-
-  fieldsToApply.forEach((key) => {
-    const value = persistData.data[key]
-    if (value !== undefined) {
-      form.setValue(key as Path<TValues>, value)
-    }
-  })
-}
-
 export function useFormPersistence<TValues extends FieldValues>({
   form,
   persistKey,
@@ -51,10 +32,15 @@ export function useFormPersistence<TValues extends FieldValues>({
   isPending,
 }: UseFormPersistenceProps<TValues>) {
   const isLoadedRef = useRef(false)
+  const watchedValues = useWatch({
+    control: form.control,
+  })
 
   /* Get persist data */
   useEffect(() => {
     if (!persistKey || isLoadedRef.current) return
+
+    isLoadedRef.current = true
 
     const persistData =
       localStorage.getItem<LocalStorageData<TValues>>(persistKey)
@@ -64,59 +50,72 @@ export function useFormPersistence<TValues extends FieldValues>({
     if (persistTimeToLive) {
       const isDataLive = persistData.timestamp + persistTimeToLive > Date.now()
 
-      if (isDataLive) {
-        applyDataToForm(form, persistData, persistFields)
-        isLoadedRef.current = true
-      } else {
+      if (!isDataLive) {
         Cookie.remove(persistKey)
         localStorage.removeItem(persistKey)
-        isLoadedRef.current = false
+        return
       }
-    } else {
-      applyDataToForm(form, persistData, persistFields)
-      isLoadedRef.current = true
     }
+
+    const valuesToApply =
+      persistFields && persistFields.length > 0
+        ? persistFields.reduce<Partial<TValues>>((acc, key) => {
+            const value = persistData.data[key]
+
+            if (value !== undefined) {
+              acc[key] = value
+            }
+
+            return acc
+          }, {})
+        : persistData.data
+
+    form.reset({
+      ...form.getValues(),
+      ...valuesToApply,
+    })
   }, [persistKey, form, persistFields, persistTimeToLive])
 
   /* Set persist data */
   useEffect(() => {
     if (!persistKey) return
 
-    const saveToLocalStorage = debounce((values) => {
+    const saveToLocalStorage = debounce((values: Partial<TValues>) => {
       Cookie.set(persistKey, "true")
-      localStorage.setItem(persistKey, values)
+      localStorage.setItem(persistKey, {
+        data: values,
+        timestamp: Date.now(),
+      })
     }, persistDebounceMs)
 
-    const subscription = form.watch((values) => {
-      const formData = Object.entries(values).reduce<PlainObject>(
-        (acc, [key, value]) => {
-          if (!persistFields || persistFields.includes(key)) {
-            acc[key] = value
-          }
+    const formData = Object.entries(watchedValues).reduce<PlainObject>(
+      (acc, [key, value]) => {
+        if (!persistFields || persistFields.includes(key)) {
+          acc[key] = value
+        }
 
-          return acc
-        },
-        {}
-      )
+        return acc
+      },
+      {}
+    )
 
-      const isEmptyValues = Object.values(formData).every(
-        (value) => value === "" || value === null || value === undefined
-      )
+    const isEmptyValues = Object.values(formData).every(
+      (value) =>
+        value === "" || value === null || value === undefined || value === false
+    )
 
-      if (isEmptyValues) {
-        Cookie.remove(persistKey)
-        localStorage.removeItem(persistKey)
-        return
-      }
+    if (isEmptyValues) {
+      Cookie.remove(persistKey)
+      localStorage.removeItem(persistKey)
+      return
+    }
 
-      saveToLocalStorage({ data: formData, timestamp: Date.now() })
-    })
+    saveToLocalStorage(formData as Partial<TValues>)
 
     return () => {
-      subscription.unsubscribe()
       saveToLocalStorage.cancel()
     }
-  }, [form, persistDebounceMs, persistFields, persistKey])
+  }, [watchedValues, persistKey, persistDebounceMs, persistFields])
 
   /* Clear persist data */
   useEffect(() => {

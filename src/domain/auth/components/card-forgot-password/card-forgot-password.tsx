@@ -16,7 +16,7 @@ export const CardForgotPassword = async ({ className }: Props) => {
   return (
     <section
       className={cn(
-        "mx-auto w-full max-w-md animate-fade-up space-y-6 px-4 shadow-lg md:px-0",
+        "mx-auto w-full max-w-md animate-fade-up space-y-6 px-4 md:px-0",
         className
       )}
     >

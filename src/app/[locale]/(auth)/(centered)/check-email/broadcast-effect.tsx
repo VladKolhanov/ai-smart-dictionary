@@ -22,7 +22,6 @@ export const BroadcastEffect = () => {
         Cookies.remove(PersistKeys.FormForgotPassword)
         localStorage.removeItem(PersistKeys.FormForgotPassword)
         router.push(Routes.SignIn)
-        router.refresh()
       }
 
       return () => {

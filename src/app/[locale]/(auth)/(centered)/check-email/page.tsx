@@ -5,6 +5,8 @@ import { CardCheckEmail } from "@/domain/auth/components/card-check-email"
 import { redirectIfSessionExist } from "@/infrastructure/auth/utils"
 import type { GenerateMetadataProps, PageProps } from "@/shared/types/global.ts"
 
+import { BroadcastEffect } from "./broadcast-effect"
+
 export async function generateMetadata({
   params,
 }: GenerateMetadataProps): Promise<Metadata> {
@@ -23,9 +25,13 @@ export default async function CheckEmailPage({ searchParams }: Props) {
   const { email } = await searchParams
 
   return (
-    <CardCheckEmail
-      email={email}
-      className="mt-15 md:mt-25"
-    />
+    <>
+      <BroadcastEffect />
+
+      <CardCheckEmail
+        email={email}
+        className="mt-15 md:mt-25"
+      />
+    </>
   )
 }

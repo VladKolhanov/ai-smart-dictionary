@@ -24,7 +24,7 @@ export const CardConfirmSuccess = async ({ className }: Props) => {
     <Card className={cn("mx-auto w-full max-w-md shadow-lg", className)}>
       <CardHeader className="text-center">
         <div className="mb-2 flex justify-center">
-          <div className="rounded-full bg-primary/10 p-3">
+          <div className="rounded-full bg-primary/30 p-3">
             <CheckCircleIcon className="size-6 text-primary md:size-8" />
           </div>
         </div>

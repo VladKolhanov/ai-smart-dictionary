@@ -20,12 +20,10 @@ export const BroadcastEffect = () => {
     channel.onmessage = (event: MessageEvent<AuthChannelMessage>) => {
       if (event.data.type === "EMAIL_CONFIRMED") {
         router.push(Routes.Dashboard)
-        router.refresh()
       } else if (event.data.type === "EXISTING_EMAIL_CONFIRMED") {
         Cookies.remove(PersistKeys.FormSignUp)
         localStorage.removeItem(PersistKeys.FormSignUp)
         router.push(Routes.SignIn)
-        router.refresh()
       }
     }
 
