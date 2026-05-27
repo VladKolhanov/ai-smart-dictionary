@@ -1,4 +1,3 @@
-import type { CSSProperties } from "react"
 import {
   Body,
   Button,
@@ -10,6 +9,7 @@ import {
   Link,
   Preview,
   Section,
+  Tailwind,
   Text,
 } from "@react-email/components"
 import { createTranslator, type Locale } from "next-intl"
@@ -31,43 +31,49 @@ export const EmailAlreadyRegistered = async ({ name, url, locale }: Props) => {
     <Html lang={locale}>
       <Head />
       <Preview>{t("preview")}</Preview>
-      <Body style={main}>
-        <Container style={container}>
-          <Heading style={heading}>
-            {name ? t("heading", { name }) : t("headingDefault")}
-          </Heading>
+      <Tailwind>
+        <Body className="bg-[#f6f9fc] font-sans">
+          <Container className="mx-auto mt-0 mb-16 max-w-140 rounded-lg border border-solid border-[#e6ebf1] bg-white px-5 py-10">
+            <Heading className="pt-4.25 text-[24px] leading-[1.3] font-normal tracking-[-0.5px] text-[#484848]">
+              {name ? t("heading", { name }) : t("headingDefault")}
+            </Heading>
 
-          <Text style={paragraph}>{t("paragraphMain")}</Text>
+            <Text className="mb-3.75 text-[15px] leading-[1.4] text-[#3c4149]">
+              {t("paragraphMain")}
+            </Text>
 
-          <Section style={buttonContainer}>
-            <Button
-              style={button}
-              href={url}
-            >
-              {t("button")}
-            </Button>
-          </Section>
+            <Section className="my-8 text-center">
+              <Button
+                className="block rounded-[5px] bg-black px-6 py-3 text-center text-[16px] font-semibold text-white no-underline"
+                href={url}
+              >
+                {t("button")}
+              </Button>
+            </Section>
 
-          <Text style={paragraph}>{t("paragraphDescription")}</Text>
+            <Text className="mb-3.75 text-[15px] leading-[1.4] text-[#3c4149]">
+              {t("paragraphDescription")}
+            </Text>
 
-          <Hr style={hr} />
+            <Hr className="my-5 border-[#e6ebf1]" />
 
-          <Text style={footer}>
-            {t("footer")}
-            <br />
-            <Link
-              href={url}
-              style={link}
-            >
-              {url}
-            </Link>
-          </Text>
+            <Text className="text-[12px] leading-4 text-[#8898aa]">
+              {t("footer")}
+              <br />
+              <Link
+                href={url}
+                className="text-[12px] text-[#b4becc]"
+              >
+                {url}
+              </Link>
+            </Text>
 
-          <Text style={footer}>
-            © {new Date().getFullYear()} LEXIO. {t("footer-copyright")}
-          </Text>
-        </Container>
-      </Body>
+            <Text className="text-[12px] leading-4 text-[#8898aa]">
+              © {new Date().getFullYear()} LEXIO. {t("footer-copyright")}
+            </Text>
+          </Container>
+        </Body>
+      </Tailwind>
     </Html>
   )
 }
@@ -79,68 +85,3 @@ EmailAlreadyRegistered.PreviewProps = {
 } satisfies Props
 
 export default EmailAlreadyRegistered
-
-const main = {
-  backgroundColor: "#f6f9fc",
-  fontFamily:
-    '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif',
-}
-
-const container: CSSProperties = {
-  backgroundColor: "#ffffff",
-  margin: "0 auto",
-  padding: "40px 20px",
-  marginBottom: "64px",
-  borderRadius: "8px",
-  maxWidth: "560px",
-  border: "1px solid #e6ebf1",
-}
-
-const heading: CSSProperties = {
-  fontSize: "24px",
-  letterSpacing: "-0.5px",
-  lineHeight: "1.3",
-  fontWeight: "400",
-  color: "#484848",
-  padding: "17px 0 0",
-}
-
-const paragraph: CSSProperties = {
-  margin: "0 0 15px",
-  fontSize: "15px",
-  lineHeight: "1.4",
-  color: "#3c4149",
-}
-
-const buttonContainer: CSSProperties = {
-  textAlign: "center" as const,
-  margin: "32px 0",
-}
-
-const button: CSSProperties = {
-  backgroundColor: "#000000",
-  borderRadius: "5px",
-  color: "#fff",
-  fontSize: "16px",
-  fontWeight: "600",
-  textDecoration: "none",
-  textAlign: "center" as const,
-  display: "block",
-  padding: "12px 24px",
-}
-
-const link: CSSProperties = {
-  color: "#b4becc",
-  fontSize: "12px",
-}
-
-const hr: CSSProperties = {
-  borderColor: "#e6ebf1",
-  margin: "20px 0",
-}
-
-const footer: CSSProperties = {
-  color: "#8898aa",
-  fontSize: "12px",
-  lineHeight: "16px",
-}
