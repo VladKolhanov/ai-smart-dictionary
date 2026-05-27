@@ -1,6 +1,6 @@
 {
   "name": "lexio",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "homepage": "https://lexio-dictionary.vercel.app/",
   "scripts": {
@@ -19,12 +19,12 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio --port 5433 --verbose",
-    "docker:up": "docker compose --env-file ./.env.development.local up -d && sleep 5 && drizzle-kit migrate && tsx --env-file=./.env.development.local ./src/lib/db/seed",
+    "docker:up": "docker compose --env-file ./.env.development.local up -d && sleep 5 && drizzle-kit migrate && tsx --env-file=./.env.development.local ./src/infrastructure/db/seed",
     "docker:down": "docker compose down",
     "prepare": "husky",
-    "email:build": "email build --dir src/lib/resend/emails --packageManager pnpm",
-    "email:dev": "email dev --dir src/lib/resend/emails --port 3100",
-    "email:export": "email export --dir src/lib/resend/emails --outDir src/lib/resend/out"
+    "email:build": "email build --dir src/infrastructure/resend/emails --packageManager pnpm",
+    "email:dev": "email dev --dir src/infrastructure/resend/emails --port 3100",
+    "email:export": "email export --dir src/infrastructure/resend/emails --outDir src/infrastructure/resend/out"
   },
   "dependencies": {
     "@arcjet/inspect": "^1.1.0",
@@ -36,7 +36,7 @@
     "@radix-ui/react-slot": "^1.2.4",
     "@react-email/components": "1.0.7",
     "@types/js-cookie": "^3.0.6",
-    "better-auth": "^1.4.18",
+    "better-auth": "^1.6.11",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dotenv": "^17.2.3",
@@ -55,7 +55,6 @@
     "server-only": "^0.0.1",
     "shadcn": "^3.8.5",
     "sonner": "^2.0.7",
-    "swr": "^2.4.0",
     "tailwind-merge": "^3.4.0",
     "zod": "^4.3.6"
   },

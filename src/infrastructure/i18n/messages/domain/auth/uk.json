@@ -1,0 +1,100 @@
+{
+  "splitLayout": {
+    "subLogo": "Вивчай мови ефективно з персоналізованим підходом"
+  },
+  "providers": {
+    "google": "Google"
+  },
+  "cardSignUp": {
+    "title": "Створіть обліковий запис",
+    "subtitle": "Почніть свою мовну подорож вже сьогодні",
+    "separator": "Або продовжити через",
+    "haveAccount": "Вже маєте обліковий запис?",
+    "signinLink": "Увійти"
+  },
+  "formSignUp": {
+    "name": "Ім'я",
+    "email": "Електронна пошта",
+    "password": "Пароль",
+    "confirmPassword": "Підтвердьте пароль",
+    "placeholders": {
+      "name": "Ваше ім'я",
+      "email": "your@gmail.com",
+      "password": "Мінімум 8 символів",
+      "confirmPassword": "Повторіть пароль"
+    },
+    "sendForm": "Створити обліковий запис"
+  },
+  "cardSignIn": {
+    "title": "Вхід до акаунту",
+    "subtitle": "Раді бачити вас знову!",
+    "separator": "Або продовжити з",
+    "haveAccount": "Немає акаунту?",
+    "signupLink": "Зареєструватися"
+  },
+  "formSignIn": {
+    "email": "Електронна пошта",
+    "password": "Пароль",
+    "sendForm": "Увійти",
+    "rememberMe": "Запам'ятати мене",
+    "forgotPassword": "Забули пароль?",
+    "placeholders": {
+      "email": "your@gmail.com",
+      "password": "********"
+    }
+  },
+  "formSubmitButton": {
+    "sending": "Відправка"
+  },
+  "cardConfirmEmail": {
+    "title": "Перевірте вашу пошту",
+    "subtitle": "Ми надіслали посилання на адресу:",
+    "content": "Натисніть посилання всередині, щоб увійти або активувати свій обліковий запис."
+  },
+  "buttonResendEmail": {
+    "repeatSending": "Надіслати лист ще раз{hasTime, select, true { через {timer} секунд} other {}}",
+    "success": "Новий лист для підтвердження відправлено на вашу пошту.",
+    "error": "Не вдалося відправити лист.{hasTime, select, true { Спробуйте ще раз через {timer} с.} other { Спробуйте пізніше.}}"
+  },
+  "emailVerified": {
+    "title": "Email успішно підтверджено!",
+    "description": "Ваш акаунт активовано. Ви можете закрити цю вкладку і повернутися до попередньої сторінки.",
+    "dashboardButton": "Перейти на головну сторінку",
+    "closeHint": "Тепер ви можете безпечно закрити це вікно.",
+    "separator": "АБО"
+  },
+  "cardForgotPassword": {
+    "title": "Відновлення пароля",
+    "subtitle": "Введіть вашу електронну адресу, і ми надішлемо вам посилання для скидання пароля",
+    "back": "Назад до входу"
+  },
+  "formForgotPassword": {
+    "labelEmail": "Електронна пошта",
+    "submitButton": "Надіслати посилання",
+    "placeholders": {
+      "email": "your@gmail.com"
+    }
+  },
+  "cardCheckEmail": {
+    "title": "Перевірте вашу пошту",
+    "subtitle": "Ми надіслали посилання на адресу:",
+    "content": "Натисніть на посилання всередині, щоб створити новий пароль."
+  },
+  "cardResetPassword": {
+    "title": "Новий пароль",
+    "subtitile": "Введіть новий пароль для вашого акаунту"
+  },
+  "formResetPassword": {
+    "password": "Новий пароль",
+    "confirmPassword": "Підтвердіть пароль",
+    "sendForm": "Зберегти пароль"
+  },
+  "signInToast": {
+    "resetPasswordSuccess": "Пароль успішно змінено. Тепер ви можете увійти в систему з новим паролем."
+  },
+  "checkEmailLayout": {
+    "content": "Не бачите листа? Перевірте папку <strong>Спам</strong> або спробуйте надіслати запит повторно.",
+    "openPost": "Відкрити пошту",
+    "backButton": "Повернутися до попередньої сторінки"
+  }
+}

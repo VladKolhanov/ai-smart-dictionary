@@ -1,0 +1,100 @@
+{
+  "splitLayout": {
+    "subLogo": "Learn languages effectively with a personalized approach"
+  },
+  "providers": {
+    "google": "Google"
+  },
+  "cardSignUp": {
+    "title": "Create an account",
+    "subtitle": "Start your language journey today",
+    "separator": "Or continue with",
+    "haveAccount": "Already have an account?",
+    "signinLink": "Sign In"
+  },
+  "formSignUp": {
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "sendForm": "Create account",
+    "placeholders": {
+      "name": "Your name",
+      "email": "your@gmail.com",
+      "password": "Minimum 8 characters",
+      "confirmPassword": "Repeat your password"
+    }
+  },
+  "cardSignIn": {
+    "title": "Sign in to your account",
+    "subtitle": "Welcome back!",
+    "separator": "Or continue with",
+    "haveAccount": "Don't have an account?",
+    "signupLink": "Sign Up"
+  },
+  "formSignIn": {
+    "email": "Email",
+    "password": "Password",
+    "sendForm": "Sign In",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "placeholders": {
+      "email": "your@gmail.com",
+      "password": "********"
+    }
+  },
+  "formSubmitButton": {
+    "sending": "Sending"
+  },
+  "cardConfirmEmail": {
+    "title": "Check your email",
+    "subtitle": "We sent an email to:",
+    "content": "Click the link inside to sign in or activate your account."
+  },
+  "buttonResendEmail": {
+    "repeatSending": "Send the email again{hasTime, select, true { in {timer} seconds} other {}}",
+    "success": "A new confirmation email has been sent to your email.",
+    "error": "Failed to send email.{hasTime, select, true { Try again in {timer} seconds.} other { Try again later.}}"
+  },
+  "emailVerified": {
+    "title": "Email successfully confirmed!",
+    "description": "Your account has been activated. You can close this tab and return to the previous page.",
+    "dashboardButton": "Go to Dashboard",
+    "closeHint": "You can now safely close this window.",
+    "separator": "OR"
+  },
+  "cardForgotPassword": {
+    "title": "Reset your password",
+    "subtitle": "Enter your email address and we'll send you a link to reset your password",
+    "back": "Back to sign in"
+  },
+  "formForgotPassword": {
+    "labelEmail": "Email",
+    "submitButton": "Send reset Link",
+    "placeholders": {
+      "email": "your@gmail.com"
+    }
+  },
+  "cardCheckEmail": {
+    "title": "Check your email",
+    "subtitle": "We sent an email to:",
+    "content": "Click the link inside to create new password."
+  },
+  "cardResetPassword": {
+    "title": "New password",
+    "subtitile": "Enter a new password for your account"
+  },
+  "formResetPassword": {
+    "password": "New password",
+    "confirmPassword": "Confirm password",
+    "sendForm": "Save password"
+  },
+  "signInToast": {
+    "resetPasswordSuccess": "Your password has been changed successfully. You can now log in with your new password."
+  },
+  "checkEmailLayout": {
+    "content": "Don't see the email? Check your <strong>Spam</strong> folder or try sending your request again.",
+    "openPost": "Open mail",
+    "backButton": "Return to previous page"
+  }
+}

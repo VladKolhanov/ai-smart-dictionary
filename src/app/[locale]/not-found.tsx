@@ -1,11 +1,17 @@
-import { Empty404 } from "@/ui/components/molecules/empty-404"
-import { TopBarWithActions } from "@/ui/components/molecules/top-bar-actions"
+"use client"
 
-export default function NotFound() {
+import { usePathname } from "@/infrastructure/i18n/navigation"
+import { TopBarControls } from "@/shared/components/ui/top-bar-actions"
+import { NotFound } from "@/shared/components/widgets/not-found"
+
+export default function NotFoundPage() {
+  const pathname = usePathname()
+
   return (
     <main className="grid h-dvh place-items-center">
-      <TopBarWithActions />
-      <Empty404 />
+      <TopBarControls />
+
+      <NotFound pathname={pathname} />
     </main>
   )
 }

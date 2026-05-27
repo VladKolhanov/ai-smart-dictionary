@@ -1,0 +1,18 @@
+import { getLocale } from "next-intl/server"
+
+import { redirect } from "@/infrastructure/i18n/navigation"
+
+type Args = Omit<Parameters<typeof redirect>["0"], "locale"> | string
+type RedirectType = Parameters<typeof redirect>["1"]
+
+export async function redirectWithSafeLocale(
+  args: Args,
+  type?: RedirectType
+): Promise<never> {
+  const locale = await getLocale()
+
+  const opt =
+    typeof args === "string" ? { href: args, locale } : { ...args, locale }
+
+  return redirect(opt, type)
+}

@@ -1,0 +1,47 @@
+{
+  "formAddWord": {
+    "toastSuccess": "The word has been added to your dictionary"
+  },
+  "themeToggle": {
+    "srLabel": "Toggle Theme",
+    "appearance": "Appearance",
+    "system": "system",
+    "light": "light",
+    "dark": "dark"
+  },
+  "languageToggle": {
+    "srLabel": "Toggle language",
+    "language": "Language"
+  },
+  "header": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  },
+  "notFound": {
+    "title": "404",
+    "description": "Page not found",
+    "contentPageIsNotExist": "The page at <code>{pathname}</code> does not exist or has been moved.",
+    "contentCheckPage": "Please check if the address is correct or use one of the actions below.",
+    "return": "Go back",
+    "sign-in": "Sign in"
+  },
+  "errorRoot": {
+    "title": "Oops! Something went wrong",
+    "description": "An unexpected error occurred",
+    "content": "We're already working on fixing it. Please try refreshing the page or come back later.",
+    "summary": "Error details",
+    "retry": "Reload"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "dictionary": "Dictionary",
+    "games": "Games",
+    "profile": "Profile",
+    "signOut": "Sign Out",
+    "expand": "Expand sidebar",
+    "collapse": "Collapse sidebar"
+  }
+}
