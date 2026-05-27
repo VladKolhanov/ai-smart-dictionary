@@ -2,12 +2,7 @@
 
 import Image from "next/image"
 
-import {
-  logoDark,
-  logoDarkSmall,
-  logoLight,
-  logoLightSmall,
-} from "@/shared/images"
+import { logoDarkSmall, logoLight, logoLightSmall } from "@/shared/images"
 import { cn } from "@/shared/utils/cn"
 
 type Props = {
@@ -22,13 +17,21 @@ export const Logo = ({ asSmall, className }: Props) => {
         src={asSmall ? logoLightSmall : logoLight}
         placeholder="blur"
         alt=""
-        className={cn("block h-7.5 w-30 dark:hidden", className)}
+        className={cn(
+          "block h-7.5 w-30 dark:hidden",
+          asSmall && "h-9",
+          className
+        )}
       />
       <Image
-        src={asSmall ? logoDarkSmall : logoDark}
+        src={asSmall ? logoDarkSmall : logoLight}
         placeholder="blur"
         alt=""
-        className={cn("hidden h-7.5 w-30 dark:block", className)}
+        className={cn(
+          "hidden h-7.5 w-30 dark:block",
+          asSmall && "h-9",
+          className
+        )}
       />
     </>
   )

@@ -1,34 +1,18 @@
 "use client"
 
+import { useTranslations } from "next-intl"
+
 import {
   Sidebar as SidebarPrimitive,
   SidebarSeparator,
   useSidebar,
 } from "@/shared/components/ui/sidebar"
-import { Routes } from "@/shared/constants"
-import { DashboardIcon, DictionaryIcon, GamesIcon } from "@/shared/icons"
+import { navItems } from "@/shared/constants"
+import { useIsMobile } from "@/shared/hooks"
 
 import { SidebarFooter } from "./sidebar-footer"
 import { SidebarHeader } from "./sidebar-header"
 import { SidebarMain } from "./sidebar-main"
-
-const navItems = [
-  {
-    title: "Dashboard",
-    icon: DashboardIcon,
-    href: Routes.Dashboard,
-  },
-  {
-    title: "Dictionary",
-    icon: DictionaryIcon,
-    href: Routes.Dictionary,
-  },
-  {
-    title: "Games",
-    icon: GamesIcon,
-    href: Routes.Games,
-  },
-]
 
 type Props = {
   className?: string
@@ -36,6 +20,8 @@ type Props = {
 
 export const Sidebar = ({ className }: Props) => {
   const { state, toggleSidebar } = useSidebar()
+  const isMobile = useIsMobile()
+  const t = useTranslations("sidebar")
   const isCollapsed = state === "collapsed"
 
   return (
@@ -46,9 +32,8 @@ export const Sidebar = ({ className }: Props) => {
     >
       <SidebarHeader isCollapsed={isCollapsed} />
 
-      <SidebarSeparator />
-
       <SidebarMain
+        t={t}
         isCollapsed={isCollapsed}
         items={navItems}
       />
@@ -56,6 +41,8 @@ export const Sidebar = ({ className }: Props) => {
       <SidebarSeparator />
 
       <SidebarFooter
+        t={t}
+        isMobile={isMobile}
         isCollapsed={isCollapsed}
         toggleSidebar={toggleSidebar}
       />

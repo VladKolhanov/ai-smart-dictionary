@@ -16,8 +16,13 @@ import {
   DropdownMenuTrigger,
 } from "@/shared/components/ui/dropdown-menu"
 import { MoonIcon, SunIcon, SunMoonIcon } from "@/shared/icons"
+import { cn } from "@/shared/utils/cn"
 
-export const ThemeToggle = () => {
+type Props = {
+  className?: string
+}
+
+export const ThemeToggle = ({ className }: Props) => {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
 
@@ -37,7 +42,10 @@ export const ThemeToggle = () => {
         render={
           <Button
             variant="ghost"
-            className="focus-visible:ring-0 focus-visible:ring-offset-0"
+            className={cn(
+              "focus-visible:ring-0 focus-visible:ring-offset-0",
+              className
+            )}
           >
             {theme === "system" ? (
               <SunMoonIcon />

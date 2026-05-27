@@ -1,3 +1,4 @@
+import { ButtonSignout } from "@/domain/auth/components/button-signout"
 import { AvatarWithDescription } from "@/shared/components/ui/avatar-with-description"
 import { Button } from "@/shared/components/ui/button"
 import {
@@ -26,17 +27,22 @@ import {
   LogOutIcon,
   UserIcon,
 } from "@/shared/icons"
+import type { TFunction } from "@/shared/types/i18n"
 import { cn } from "@/shared/utils/cn"
 
 type Props = {
   toggleSidebar: ReturnType<typeof useSidebar>["toggleSidebar"]
   isCollapsed: boolean
+  isMobile: boolean
+  t: TFunction<"sidebar">
   className?: string
 }
 
 export const SidebarFooter = ({
   toggleSidebar,
   isCollapsed,
+  isMobile,
+  t,
   className,
 }: Props) => {
   return (
@@ -77,19 +83,20 @@ export const SidebarFooter = ({
           >
             <DropdownMenuItem>
               <UserIcon className="size-4" />
-              <span>Profile</span>
+              <span>{t("profile")}</span>
             </DropdownMenuItem>
           </Link>
 
           <DropdownMenuSeparator />
 
-          <DropdownMenuItem
-            className="cursor-pointer gap-2 text-destructive hover:bg-sidebar-accent focus:text-destructive"
-            variant="destructive"
+          <ButtonSignout
+            variant="wrapper"
+            size="sm"
+            className="flex w-full justify-start rounded-none text-destructive hover:bg-sidebar-accent"
           >
             <LogOutIcon className="size-4" />
-            <span>Sign Out</span>
-          </DropdownMenuItem>
+            <span>{t("signOut")}</span>
+          </ButtonSignout>
         </DropdownMenuContent>
       </DropdownMenu>
 
@@ -102,20 +109,22 @@ export const SidebarFooter = ({
                 onClick={toggleSidebar}
               >
                 <ChevronsRightIcon className="size-5" />
-                <span className="sr-only">Expand sidebar</span>
+                <span className="sr-only">{t("expand")}</span>
               </Button>
             }
           />
-          <TooltipContent side="right">Expand sidebar</TooltipContent>
+          <TooltipContent side="right">{t("expand")}</TooltipContent>
         </Tooltip>
       ) : (
-        <Button
-          variant="ghost"
-          onClick={toggleSidebar}
-        >
-          <ChevronsLeftIcon className="size-5" />
-          <span className="sr-only">Collapse sidebar</span>
-        </Button>
+        !isMobile && (
+          <Button
+            variant="ghost"
+            onClick={toggleSidebar}
+          >
+            <ChevronsLeftIcon className="size-5" />
+            <span className="sr-only">{t("collapse")}</span>
+          </Button>
+        )
       )}
     </SidebarFooterPrimitive>
   )

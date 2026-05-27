@@ -28,7 +28,10 @@ export const ButtonSignout = ({
     <Button
       onClick={handleClick}
       disabled={isPending}
-      className={cn("flex-center gap-x-1", className)}
+      className={cn(
+        "flex items-center justify-center gap-x-1 px-1.5",
+        className
+      )}
       variant={variant}
       {...props}
     >

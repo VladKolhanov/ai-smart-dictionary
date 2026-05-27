@@ -9,10 +9,14 @@ type Props = {
 
 export const SidebarHeader = ({ className, isCollapsed }: Props) => {
   return (
-    <SidebarHeaderPrimitive className={cn(className)}>
+    <SidebarHeaderPrimitive
+      className={cn(
+        "flex-center h-14 border-b border-sidebar-border",
+        className
+      )}
+    >
       <div
         className={cn(
-          "flex items-center gap-3",
           !isCollapsed && "px-2 py-1",
           isCollapsed && "justify-center"
         )}

@@ -34,5 +34,14 @@
     "content": "We're already working on fixing it. Please try refreshing the page or come back later.",
     "summary": "Error details",
     "retry": "Reload"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "dictionary": "Dictionary",
+    "games": "Games",
+    "profile": "Profile",
+    "signOut": "Sign Out",
+    "expand": "Expand sidebar",
+    "collapse": "Collapse sidebar"
   }
 }

@@ -1,3 +1,7 @@
+import type { Messages } from "next-intl"
+
+import { DashboardIcon, DictionaryIcon, GamesIcon } from "@/shared/icons"
+import type { Icon } from "@/shared/types/global"
 import type { ValueOf } from "@/shared/types/utils"
 
 export const Routes = {
@@ -37,3 +41,25 @@ export type AuthChannelMessage = Record<
   "type",
   ValueOf<typeof AuthChannelMessages>
 >
+
+export const navItems = [
+  {
+    title: "dashboard",
+    icon: DashboardIcon,
+    href: Routes.Dashboard,
+  },
+  {
+    title: "dictionary",
+    icon: DictionaryIcon,
+    href: Routes.Dictionary,
+  },
+  {
+    title: "games",
+    icon: GamesIcon,
+    href: Routes.Games,
+  },
+] satisfies {
+  title: keyof Messages["sidebar"]
+  icon: Icon
+  href: ValueOf<typeof Routes>
+}[]
