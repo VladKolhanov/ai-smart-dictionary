@@ -1,3 +1,5 @@
+import type { User } from "better-auth"
+
 import { ButtonSignout } from "@/domain/auth/components/button-signout"
 import { AvatarWithDescription } from "@/shared/components/ui/avatar-with-description"
 import { Button } from "@/shared/components/ui/button"
@@ -21,16 +23,14 @@ import {
   TooltipTrigger,
 } from "@/shared/components/ui/tooltip"
 import { Routes } from "@/shared/constants"
-import {
-  ChevronsLeftIcon,
-  ChevronsRightIcon,
-  LogOutIcon,
-  UserIcon,
-} from "@/shared/icons"
+import { ChevronsLeftIcon, ChevronsRightIcon, UserIcon } from "@/shared/icons"
 import type { TFunction } from "@/shared/types/i18n"
 import { cn } from "@/shared/utils/cn"
 
 type Props = {
+  name: User["name"]
+  email: User["email"]
+  image: User["image"]
   toggleSidebar: ReturnType<typeof useSidebar>["toggleSidebar"]
   isCollapsed: boolean
   isMobile: boolean
@@ -39,6 +39,9 @@ type Props = {
 }
 
 export const SidebarFooter = ({
+  name,
+  email,
+  image,
   toggleSidebar,
   isCollapsed,
   isMobile,
@@ -52,8 +55,9 @@ export const SidebarFooter = ({
           render={
             <button className="cursor-pointer rounded-lg transition-colors hover:bg-sidebar-accent">
               <AvatarWithDescription
-                name="John"
-                email="johndoe@gmail.com"
+                name={name}
+                email={email}
+                image={image}
                 isShowDescription={!isCollapsed}
               />
             </button>
@@ -67,8 +71,9 @@ export const SidebarFooter = ({
           <DropdownMenuGroup>
             <DropdownMenuLabel>
               <AvatarWithDescription
-                name="John"
-                email="johndoe@gmail.com"
+                name={name}
+                email={email}
+                image={image}
                 isShowDescription={true}
               />
             </DropdownMenuLabel>
@@ -94,7 +99,6 @@ export const SidebarFooter = ({
             size="sm"
             className="flex w-full justify-start rounded-none text-destructive hover:bg-sidebar-accent"
           >
-            <LogOutIcon className="size-4" />
             <span>{t("signOut")}</span>
           </ButtonSignout>
         </DropdownMenuContent>

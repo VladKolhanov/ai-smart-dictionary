@@ -6,6 +6,7 @@ import {
 import { cn } from "@/shared/utils/cn"
 
 type Props = {
+  image: string | null | undefined
   className?: string
 } & (
   | {
@@ -36,6 +37,7 @@ export const AvatarWithDescription = ({
   isShowDescription,
   name,
   email,
+  image,
   className,
 }: Props) => {
   const fallback = getFallback(name)
@@ -48,7 +50,10 @@ export const AvatarWithDescription = ({
       )}
     >
       <Avatar className="size-8">
-        <AvatarImage alt="User avatar" />
+        <AvatarImage
+          src={image || undefined}
+          alt="User avatar"
+        />
         <AvatarFallback className="bg-sidebar-primary text-xs font-medium text-sidebar-primary-foreground">
           {fallback}
         </AvatarFallback>

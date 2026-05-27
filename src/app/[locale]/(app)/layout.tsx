@@ -7,11 +7,11 @@ import type { LayoutProps } from "@/shared/types/global"
 type Props = LayoutProps
 
 export default async function AppLayout({ children }: Props) {
-  await getSessionOrRedirect()
+  const session = await getSessionOrRedirect()
 
   return (
     <SidebarProvider>
-      <Sidebar />
+      <Sidebar user={session.user} />
 
       <SidebarInset className="flex min-h-screen flex-col">
         <HeaderApp />

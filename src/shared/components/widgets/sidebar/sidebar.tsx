@@ -1,5 +1,6 @@
 "use client"
 
+import type { User } from "better-auth"
 import { useTranslations } from "next-intl"
 
 import {
@@ -15,10 +16,11 @@ import { SidebarHeader } from "./sidebar-header"
 import { SidebarMain } from "./sidebar-main"
 
 type Props = {
+  user: User
   className?: string
 }
 
-export const Sidebar = ({ className }: Props) => {
+export const Sidebar = ({ user, className }: Props) => {
   const { state, toggleSidebar } = useSidebar()
   const isMobile = useIsMobile()
   const t = useTranslations("sidebar")
@@ -42,6 +44,9 @@ export const Sidebar = ({ className }: Props) => {
 
       <SidebarFooter
         t={t}
+        name={user.name}
+        image={user.image}
+        email={user.email}
         isMobile={isMobile}
         isCollapsed={isCollapsed}
         toggleSidebar={toggleSidebar}
