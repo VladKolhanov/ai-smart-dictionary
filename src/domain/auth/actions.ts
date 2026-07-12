@@ -14,7 +14,7 @@ import {
 import { sendEmail } from "@/infrastructure/resend/utils"
 import { PersistKeys, Routes } from "@/shared/constants"
 import { ENV_CLIENT } from "@/shared/env-client"
-import { AppError, BussinessError } from "@/shared/errors/exceptions"
+import { AppError, BusinessError } from "@/shared/errors/exceptions"
 import { clearPersistFormData } from "@/shared/utils/clear-persist-form-data"
 import { parseFormData } from "@/shared/utils/parse-form-data"
 import { redirectWithSafeLocale } from "@/shared/utils/redirect-with-safe-locale"
@@ -78,7 +78,7 @@ export const signInWithProvider = safeAction(
     if (result.redirect && result.url) {
       await redirectWithSafeLocale(result.url)
     } else {
-      throw new BussinessError("AUTH_PROVIDER_ERROR")
+      throw new BusinessError("AUTH_PROVIDER_ERROR")
     }
   }
 )

@@ -5,7 +5,7 @@ import { getTranslations } from "next-intl/server"
 import type { AvailableFormFields } from "@/infrastructure/db/types"
 import type { ServerError } from "@/shared/types/global"
 
-import { AppError, BussinessError } from "./exceptions"
+import { AppError, BusinessError } from "./exceptions"
 import { isZodFlattenErrorDetails } from "../types/guards"
 
 export const handleError = async (
@@ -17,7 +17,7 @@ export const handleError = async (
 
   const t = await getTranslations("errors")
 
-  if (error instanceof BussinessError) {
+  if (error instanceof BusinessError) {
     const actionResponse = {
       code: error.code,
       message: error.message,

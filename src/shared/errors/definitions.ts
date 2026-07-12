@@ -1,6 +1,6 @@
 import type { ValueOfSet } from "@/shared/types/utils"
 
-export const BussinessErrorCodes = new Set([
+export const BusinessErrorCodes = new Set([
   "ZOD_PARSE_SCHEMA",
   "ACTION_FAILED",
   "TOO_MANY_REQUESTS",
@@ -12,7 +12,7 @@ export const BussinessErrorCodes = new Set([
   "AUTH_PROVIDER_ERROR",
 ] as const)
 
-export type BussinessErrorCodes = ValueOfSet<typeof BussinessErrorCodes>
+export type BusinessErrorCodes = ValueOfSet<typeof BusinessErrorCodes>
 
 export const AppErrorCodes = new Set(["DETECT_BOT", "TOKEN_NOT_EXIST"] as const)
 

@@ -3,7 +3,7 @@ import type { APIError } from "better-auth"
 import type { LucideIcon } from "lucide-react"
 import type { Locale } from "next-intl"
 
-import { type BussinessErrorCodes } from "@/shared/errors/definitions"
+import { type BusinessErrorCodes } from "@/shared/errors/definitions"
 
 export type Icon = LucideIcon | FC<SVGProps<SVGElement>>
 export type PlainObject<TValue = unknown> = Record<PropertyKey, TValue>
@@ -14,7 +14,7 @@ export type ZodFlattenError = {
 }
 
 export type ServerError<TPaths = string> = {
-  code: BussinessErrorCodes | APIError["status"]
+  code: BusinessErrorCodes | APIError["status"]
   message: string
   details?: { paths?: TPaths[]; fieldErrors?: ZodFlattenError["fieldErrors"] }
 }

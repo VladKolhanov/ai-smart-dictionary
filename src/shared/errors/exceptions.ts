@@ -3,18 +3,18 @@ import type { PlainObject } from "@/shared/types/global"
 import {
   type AppErrorCodes,
   AppErrorMessages,
-  type BussinessErrorCodes,
+  type BusinessErrorCodes,
 } from "./definitions"
 
 type Options = {
   details?: PlainObject
 }
 
-export class BussinessError extends Error {
+export class BusinessError extends Error {
   readonly code
   readonly details?: Options["details"]
 
-  constructor(code: BussinessErrorCodes, options?: Options) {
+  constructor(code: BusinessErrorCodes, options?: Options) {
     super()
 
     this.code = code

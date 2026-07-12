@@ -8,7 +8,7 @@ import arcjet, {
 
 import { auth } from "@/infrastructure/auth/auth"
 import { ENV } from "@/shared/env"
-import { AppError, BussinessError } from "@/shared/errors/exceptions"
+import { AppError, BusinessError } from "@/shared/errors/exceptions"
 
 const baseRules = [
   shield({ mode: "LIVE" }),
@@ -55,16 +55,16 @@ export const protect = async (email?: string) => {
 
   if (decision.isDenied()) {
     if (decision.reason.isRateLimit()) {
-      throw new BussinessError("TOO_MANY_REQUESTS")
+      throw new BusinessError("TOO_MANY_REQUESTS")
     } else if (decision.reason.isEmail()) {
       if (decision.reason.emailTypes.includes("INVALID")) {
-        throw new BussinessError("EMAIL_FORMAT_INVALID")
+        throw new BusinessError("EMAIL_FORMAT_INVALID")
       } else if (decision.reason.emailTypes.includes("DISPOSABLE")) {
-        throw new BussinessError("DISPOSABLE_EMAIL")
+        throw new BusinessError("DISPOSABLE_EMAIL")
       } else if (decision.reason.emailTypes.includes("NO_MX_RECORDS")) {
-        throw new BussinessError("EMAIL_DOMAIN_NOT_VALID")
+        throw new BusinessError("EMAIL_DOMAIN_NOT_VALID")
       } else {
-        throw new BussinessError("INVALID_EMAIL")
+        throw new BusinessError("INVALID_EMAIL")
       }
     } else {
       throw new AppError("DETECT_BOT")
